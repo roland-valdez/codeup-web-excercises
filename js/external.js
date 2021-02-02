@@ -35,14 +35,14 @@ var fh = prompt("How many hours did you work at Facebook?");
 
 var pay = (goo * gh) + (am * ah) + (fb * fh);
 var pay  = pay.toFixed(2);
-alert("What I need to get paid work is $" + pay + ".");
+alert("For this pay period you should be paid $" + pay + " for all the jobs you have.");
 
 /* A student can be enrolled in a class only if the class is not full and the class schedule does not conflict with her current schedule.*/
 var full = confirm("Is the class your are applying for full already?");
 var con = confirm("Will the class time conflict with your current schedule?");
 
 if (full === false && con === false){
-	alert("You can register for the Class!")
+	alert("Congratulations you can register for the class!")
 }else {
 	alert("Can't join the class as you don't meet the requirements.");
 }
@@ -61,13 +61,13 @@ if (mem === true) {
 	alert("You don' qualify for any discount. Sorry.");
 }
 
-/* leaving code here in case I have to reuse as it was delete from dropbox folder.
 
+/* #4 as requested to complete by Samuel
 Create a variable that holds a boolean value for each of the following conditions:
 		the password must be at least 5 characters
 		the password must not include the username
 		the username must be no more than 20 characters
-		neither the username or password can start or end with whitespace
+		neither the username or password can start or end with whitespace */
 var username = prompt("What is you username?");
 var password = prompt("What is your password?");
 var boolpass = 0, userpass = 0, size = 0, space = 0;
@@ -95,10 +95,10 @@ if (username.length <= 20) {
 }
 
 if (username != username.trim() || password != password.trim()) {
-	alert("You have whitespace");
+	alert("You have whitespace in your username or password.");
 		space = true;
 
 }else  {
-	alert("There is no whitespace")
+	alert("There is no whitespace in your username or password.")
 		space = false;
-} */
+}
