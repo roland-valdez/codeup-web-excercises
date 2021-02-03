@@ -5,57 +5,57 @@ alert("Hello from external JavaScript!");
 alert("Welcome to my Website!");
 
 //#2
-var color =  prompt("What is you favorite color?");
-alert("Great " + color + " is my favorite color too!");
+var favoriteColor =  prompt("What is you favorite color?");
+alert("Great " + favoriteColor + " is my favorite color too!");
 
 // #3 - Excercise three from previous lesson
 
 /* You have rented some movies for your kids: The little mermaid (for 3 days), Brother Bear (for 5 days, they love it), and 
 	Hercules (1 day, you don't know yet if they're going to like it). If price for a movie per day is $3, how much will you have to pay?*/
-var lm = prompt("How many days did you rent the little mermaid for?");
-var bb = prompt("Hoe many days did you rent Brother Bear for?");
-var h = prompt("How many days did you rent Hercules for?");
+var littleMermaid = prompt("How many days did you rent the little mermaid for?");
+var brotherBear = prompt("Hoe many days did you rent Brother Bear for?");
+var hercules= prompt("How many days did you rent Hercules for?");
 var rent = prompt("What was the daily rental cost?");
 
 
-var cost = (lm * rent) + (bb * rent) + (h * rent);
+var cost = (littleMermaid * rent) + (brotherBear * rent) + (hercules* rent);
 var cost = cost.toFixed(2);
 alert("Your rental for the all the movies for your given information is $" + cost + ".");
 
 /* Suppose you're working as a contractor for 3 companies: Google, Amazon and Facebook, they pay you a different rate per hour. Google pays $400, 
 	Amazon $380, and Facebook $350. How much will you receive in payment for this week? You worked 10 hours for Facebook, 6 hours for Google and 4 hours for Amazon.*/
-var goo = prompt("What is your pay rate at your Google job?");
-var gh = prompt("How many hours did you work at Google?");
+var googlePay = prompt("What is your pay rate at your Google job?");
+var googleHours = prompt("How many hours did you work at Google?");
 
-var	am = prompt("What is your pay rate at your Amazon job?") ;
-var ah = prompt("How many hours did you work at Amazon?");
+var	amazon= prompt("What is your pay rate at your Amazon job?") ;
+var amazonHours = prompt("How many hours did you work at Amazon?");
 
-var	fb = prompt("What is your pay rate at your Facebook job?");
-var fh = prompt("How many hours did you work at Facebook?");
+var	facebook = prompt("What is your pay rate at your Facebook job?");
+var facebookHours = prompt("How many hours did you work at Facebook?");
 
-var pay = (goo * gh) + (am * ah) + (fb * fh);
+var pay = (googlePay * googleHours) + (amazon* amazonHours) + (facebook * facebookHours);
 var pay  = pay.toFixed(2);
 alert("For this pay period you should be paid $" + pay + " for all the jobs you have.");
 
 /* A student can be enrolled in a class only if the class is not full and the class schedule does not conflict with her current schedule.*/
-var full = confirm("Is the class your are applying for full already?");
-var con = confirm("Will the class time conflict with your current schedule?");
+var classFull = confirm("Is the class your are applying for full already?");
+var classConflict= confirm("Will the class time conflict with your current schedule?");
 
-if (full === false && con === false){
+if (classFull === false && classConflict=== false){
 	alert("Congratulations you can register for the class!")
 }else {
 	alert("Can't join the class as you don't meet the requirements.");
 }
 
 /* A product offer can be applied only if a person buys more than 2 items, and the offer has not expired. Premium members do not need to buy a specific amount of products*/
-var prod = prompt("How many products are you buying?"); 
-var mem = confirm("Are you a Premium member?");
-var exp = confirm("Has the product offer expired?")
+var howManyProducts = prompt("How many products are you buying?"); 
+var isPremiumMember= confirm("Are you a Premium member?");
+var expiredOffer = confirm("Has the product offer expired?")
 
 
-if (mem === true) {
-	alert("You qualify for discount as a Premium member!"); // from class you could do it all in one with: (prod || mem) && exp
-}else if (prod > 2 && exp === false) {
+if (isPremiumMember=== true) {
+	alert("You qualify for discount as a Premium member!"); // from class you could do it all in one with: (howManyProducts|| mem) && exp
+}else if (howManyProducts > 2 && expiredOffer === false) {
 	alert("You qualify for discount as the offer is still valid and due to the number of products you are purchasing!");
 }else {
 	alert("You don' qualify for any discount. Sorry.");
@@ -70,28 +70,28 @@ Create a variable that holds a boolean value for each of the following condition
 		neither the username or password can start or end with whitespace */
 var username = prompt("What is you username?");
 var password = prompt("What is your password?");
-var boolpass = 0, userpass = 0, size = 0, space = 0;
+//var boolpass = 0, userpass = 0, size = 0, space = 0;
 
 if (password.length >= 5){
 	alert(password + " is a strong password")
-	boolpass = true;
+	//boolpass = true;
 }else {
 	alert(password + " is a weak password")
 	boolpass = false;
 }
 if (password.replace(username, "") === password) {
 	alert("Password and username combination are acceptable.")
-		userpass = true;
+		//userpass = true;
 }else {
 	alert("Password can not include user name.")
-		userpass = false;
+		//userpass = false;
 }
 if (username.length <= 20) {
 	alert("You have the proper username length.")
-	size = true;
+	//size = true;
 }else {
 	alert("You have too large of a username.")
-	size  = false;
+	//size  = false;
 }
 
 if (username != username.trim() || password != password.trim()) {
