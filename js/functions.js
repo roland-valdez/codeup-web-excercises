@@ -8,6 +8,10 @@
  * Example
  * > sayHello("codeup") // returns "Hello, codeup!"
  */
+function sayHello(name){
+    return console.log(name);
+}
+sayHello("Roland");
 
 /**
  * TODO:
@@ -16,6 +20,7 @@
  *
  * console.log 'helloMessage' to check your work
  */
+var helloMessage = sayHello("Joseph");
 
 /**
  * TODO:
@@ -23,6 +28,8 @@
  * variable to the 'sayHello' function. You should see the same output in the
  * console.
  */
+var myName = "Steve";
+sayHello(myName);
 
 // Don't modify the following line, it generates a random number between 1 and 3
 // and stores it in a variable named random
@@ -45,7 +52,14 @@ var random = Math.floor((Math.random() * 3) + 1);
  * different result everytime you refresh the page if you are using the random
  * number)
  */
+function isTwo(random) {
+     yesTwo = (random / 2) === 1; //var yesTwo = (random / 2) === 1; local variable is redundant WHY?
 
+    return yesTwo;
+}
+
+var yesTwo = isTwo(random);// would this bee good long term in code if the global variable is same as local????
+console.log(yesTwo);
 /**
  * TODO:
  * Create a function named 'calculateTip' to calculate a tip on a bill at a
@@ -57,6 +71,10 @@ var random = Math.floor((Math.random() * 3) + 1);
  * > calculateTip(0.25, 25.50) // returns 6.375
  * > calculateTip(0.15, 33.42) // returns 5.013
  */
+function calculateTip(tipPercentage, billTotal) {
+    amountTip = tipPercentage * billTotal;
+    return amountTip;
+}
 
 /**
  * TODO:
@@ -64,6 +82,11 @@ var random = Math.floor((Math.random() * 3) + 1);
  * prompt the user for the bill total and a percentage they would like to tip,
  * then display the dollar amount they should tip
  */
+var tipPercentage = prompt("What percentage do you want to leave as tip?");
+var billTotal = prompt("What was the total amount of your bill?");
+var amountTip = calculateTip(tipPercentage, billTotal);
+
+alert("You will need to add $" + amountTip +  " as the tip amount.");
 
 /**
  * TODO:
@@ -79,3 +102,15 @@ var random = Math.floor((Math.random() * 3) + 1);
  *
  * > applyDiscount(45.99, 0.12) // 40.4712
  */
+
+function applyDiscount(originalPrice, discountPercent) {//doing weird stuff as it would grey our one of the values
+
+    discountedPrice = originalPrice - (originalPrice * discountPercent);
+    return discountedPrice;
+}
+
+var originalPrice = prompt("What is the origional price?");
+var discountPercent = prompt("What is the discount percent?");
+
+var discountedPrice  = applyDiscount(originalPrice, discountPercent);
+alert("Your discounted price is $" + discountedPrice + ".");
