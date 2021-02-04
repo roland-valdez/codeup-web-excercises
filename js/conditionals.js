@@ -19,7 +19,9 @@
  * Test your function by passing various string literals to it and
  * console.logging the function's return value
  */
-
+/*
+        #1
+*/
 function analyzeColor(color){
 var message; // need to review the scope of this with instructor
     if (color === "blue"){
@@ -48,12 +50,18 @@ var randomColor = colors[Math.floor(Math.random() * colors.length)];
  * Pass the `randomColor` variable to your function and console.log the results.
  * You should see a different message every time you refresh the page
  */
+/*
+        #2
+*/
 console.log(analyzeColor(randomColor));
 
 /**
  * TODO:
  * Refactor your above function to use a switch-case statement
  */
+/*
+        #3
+*/
 function analyzeColor2(color) {// not sure if this is what you wanted to happen
     var message;
     switch (color) {
@@ -79,6 +87,9 @@ console.log(analyzeColor2(randomColor));
  * user to your `analyzeColor` function. Alert the return value from your
  * function to show it to the user.
  */
+/*
+        #4
+*/
 var userColor = prompt("Choose a color.");
 alert(analyzeColor(userColor));
 /* ########################################################################## */
@@ -102,13 +113,16 @@ alert(analyzeColor(userColor));
  * Test your function by passing it various values and checking for the expected
  * return value.
  */
-var luckyNumber = prompt("What is your lucky number?");
-var total = prompt("What is the total of your purchase?");
+/*
+        #5
+*/
+var luckyNumber = Number(prompt("What is your lucky number?"));
+var total = Number(prompt("What is the total of your purchase?"));
 
 function calculatedTotal(luckyNumber, total) {
-    var discountedTotal = 500;
-    switch (luckyNumber, total){
-        case "0":
+    var discountedTotal;
+    switch (luckyNumber){
+        case 0:
             discountedTotal = total;
             break;
         case 1:
@@ -121,19 +135,22 @@ function calculatedTotal(luckyNumber, total) {
             discountedTotal = total - (total * 0.35);
             break;
         case 4:
-            break;
             discountedTotal = total - (total * 0.5);
-        case "5":
+            break;
+        case 5:
             discountedTotal = 0;
             break;
         default:
+            discountedTotal = 7000;
             break;
     }
-//    var message = "Your discounted is $" + discountedTotal + ".";
-  //  var message = discountedTotal;
-    return discountedTotal;
+    alert("Your discounted total is $" + discountedTotal + ".");
+
 }
- alert(calculatedTotal(luckyNumber, total));
+
+calculatedTotal(luckyNumber, total);
+
+
 /**
  * TODO:
  * Uncomment the line below to generate a random number between 0 and 6.
@@ -142,8 +159,14 @@ function calculatedTotal(luckyNumber, total) {
  * price before the discount was, and what their price after the discount is.
  */
 // Generate a random number between 0 and 6
-// var luckyNumber = Math.floor(Math.random() * 6);
-
+var luckyNumber = Math.floor(Math.random() * 6);
+/*
+        #6
+*/
+var total = Number(prompt("What is the total of your purchase?"));
+alert("Your lucky number was " + luckyNumber + ".");
+alert("Your price before discount was $" + total + ".");
+calculatedTotal(luckyNumber, total); // all this function does is output already in an alert format with the discounted total.
 /**
  * TODO:
  * Write some JavaScript that uses a `confirm` dialog to ask the user if they
@@ -160,3 +183,76 @@ function calculatedTotal(luckyNumber, total) {
  * Can you refactor your code to use functions?
  * HINT: The way we prompt for a value could be improved
  */
+/*
+        #7
+*/
+var answer = confirm("Would you like to enter a number?");
+
+if (answer === true) {
+    var number = Number(prompt("Enter your number."));
+    if (isNaN(number) === false) {
+
+        if (number % 2 === 0) {
+            alert("The number you entered is even.");
+        } else {
+            alert("The number you entered is odd.");
+        }
+
+        var plus100 = number + 100;
+        alert("The number you entered plus 100 is " + plus100 + ".");
+
+        if (number < 0) {
+            alert("The number you entered is negative.");
+        } else {
+            alert("The number you entered is positive.");
+        }
+    }else {
+        alert("what you typed in is not a number goodbye.");
+    }
+
+}else if(answer === false) {
+    alert("Sorry to have bothered you.");
+}
+/*
+        #7 refactored
+*/
+function oddEven(number){
+    if (number % 2 === 0) {
+        alert("The number you entered is even.");
+    } else {
+        alert("The number you entered is odd.");
+    }
+}
+function positiveNegative(number) {
+    if (number < 0) {
+        alert("The number you entered is negative.");
+    } else {
+        alert("The number you entered is positive.");
+    }
+}
+
+
+var answer = confirm("Would you like to enter a number?");
+
+if (answer === true) {
+    var number = Number(prompt("Enter your number."));
+    if (isNaN(number) === false) {
+
+        oddEven(number);
+
+        var plus100 = number + 100;
+        alert("The number you entered plus 100 is " + plus100 + ".");
+
+        positiveNegative(number);
+
+    }else {
+        alert("what you typed in is not a number goodbye.");
+    }
+
+}else if(answer === false) {
+    alert("Sorry to have bothered you.")
+}
+
+
+
+
