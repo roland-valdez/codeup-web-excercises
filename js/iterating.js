@@ -61,7 +61,7 @@
         return console.log(input[1]);
     }
     function third(input){
-        return console.log(input[2]);
+        return console.log(input[4]);
     }
     first(numbers);
     second(numbers);
