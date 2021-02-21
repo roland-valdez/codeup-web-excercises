@@ -33,5 +33,5 @@
     }
     planetsList = "<ul>" + planetsList + "</ul>";
     console.log(planetsList);
-    console.log("It would be helpful so that an array that was input could be displayed on a webpage as a list")
+    console.log("It would be helpful so that an array that was input could be displayed on a webpage as a list");
 })();
