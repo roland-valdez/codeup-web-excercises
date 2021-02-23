@@ -137,8 +137,7 @@ console.log(favoriteFoods[2]);
 //4. return the last item
 
 function returnLastElement(array){
-    var lastElement = array[array.length -1];
-    return lastElement;
+    return array[array.length -1];
 }
 // console.log(returnLastElement(instructors)); //fernando
 // console.log(returnLastElement(daysOfTheWeek)); //sunday
@@ -170,7 +169,7 @@ for (var i = 0; i < shapes.length; i++){
 for (var i = 0; i < shapes.length; i++){
     if (shapes[i] === "circle"){
         console.log(shapes[i]);
-        console.log("The " + shapes[i] + " is my favorite shape!");
+        alert("The " + shapes[i] + " is my favorite shape!");
     }else {
         console.log(shapes[i]);
     }
@@ -204,10 +203,9 @@ for (var i = 0; i < favoriteFoods.length; i++) {
 
 for (var i = 0; i < instructors.length; i++) {
     if (instructors[i] === "douglas" || instructors[i] === "kenneth" || instructors[i] === "samuel") {
-        console.log(instructors[i]);
-        console.log("I know " + instructors[i] + ".");
+        alert("I know " + instructors[i] + ".");
     }else {
-        console.log(instructors[i]);
+        alert("I haven't had a class with " + instructors[i] + " yet!");
     }
 }
 
@@ -216,19 +214,33 @@ for (var i = 0; i < instructors.length; i++) {
 *************************************************************** */
 
 // TODO TOGETHER: Using a for each loop, console.log each shape from the shapes array
+shapes.forEach(function(shape) {
+    console.log(shape);
+});
 
 
+}
 
 // TODO TOGETHER: Using a for each loop, console.log each element from the following array: var pies = ["apple", "cherry", "key lime", "huckleberry"];
-
+var pies = ["apple", "cherry", "key lime", "huckleberry"];
+pies.forEach(function (flavor){
+    console.log(flavor);
+});
 
 
 // TODO: Using a for each loop, iterate through the instructors array and console.log each instructor
-
+instructors.forEach(function (who){
+    console.log(who);
+});
 
 
 // TODO: Using a for each loop, iterate through the daysOfTheWeek array and console.log each day of the week
-
+daysOfTheWeek.forEach(function (day){
+    console.log(day);
+});
 
 
 // TODO: Using a for each loop, iterate through the favoriteFoods array and console.log each favorite food
+favoriteFoods.forEach(function(food){
+    console.log(food);
+});
