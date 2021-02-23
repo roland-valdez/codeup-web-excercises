@@ -219,7 +219,7 @@ shapes.forEach(function(shape) {
 });
 
 
-}
+
 
 // TODO TOGETHER: Using a for each loop, console.log each element from the following array: var pies = ["apple", "cherry", "key lime", "huckleberry"];
 var pies = ["apple", "cherry", "key lime", "huckleberry"];
