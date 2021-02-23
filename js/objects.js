@@ -72,13 +72,13 @@
      * > console.log(books[0].author.firstName) // "Douglas"
      * > console.log(books[0].author.lastName) // "Adams"
      */
-    // var books = [
-    //     {title: "Becoming a Developer", author: {firstName:"Douglas", lastName: "Hirsh"}},
-    //     {title: "My life from teaching to car sales to teaching!", author:{firstName:"Kenneth", lastName: "Howell"}},
-    //     {title: "My journey through Codeup", author: {firstName:"Roland", lastName: "Valdez"}},
-    //     {title: "Creating developers for the 21st century", author:{firstName: "Jason", lastName: "Straughan"}},
-    //     {title: "What did we get into?", author:{firstName:"Marco", lastName: "Cohort"}}
-    // ]
+    var books = [
+        {title: "Becoming a Developer", author: {firstName:"Douglas", lastName: "Hirsh"}},
+        {title: "My life from teaching to car sales to teaching!", author:{firstName:"Kenneth", lastName: "Howell"}},
+        {title: "My journey through Codeup", author: {firstName:"Roland", lastName: "Valdez"}},
+        {title: "Creating developers for the 21st century", author:{firstName: "Jason", lastName: "Straughan"}},
+        {title: "What did we get into?", author:{firstName:"Marco", lastName: "Cohort"}}
+    ]
     // /**
     //  * TODO:
     //  * Loop through the books array and output the following information about
@@ -103,12 +103,12 @@
     //  *      ---
     //  *      ...
     //  */
-    // for (var i = 0; i < books.length; i++){
-    //     console.log("Book #" + (i+1));
-    //     console.log("Title: " + books[i].title);
-    //     console.log("Author: " + books[i].author.firstName + " " + books[i].author.lastName);
-    //     console.log("---");
-    // }
+    for (var i = 0; i < books.length; i++){
+        console.log("Book #" + (i+1));
+        console.log("Title: " + books[i].title);
+        console.log("Author: " + books[i].author.firstName + " " + books[i].author.lastName);
+        console.log("---");
+    }
     /**
      * Bonus:
      * - Create a function named `createBook` that accepts a title and author
@@ -137,9 +137,16 @@
 
         return books;
     }
-    console.log(createBook());
+    var books = createBook();
 
-    function showBookInfo(){
-
+    function showBookInfo(books){
+        for (var i = 0; i < books.length; i++){
+            console.log("Book #" + (i+1));
+            console.log("Title: " + books[i].title);
+            console.log("Author: " + books[i].author.firstName + " " + books[i].author.lastName);
+            console.log("---");
+            return
+        }
     }
+    console.log(showBookInfo(books));
 })();
