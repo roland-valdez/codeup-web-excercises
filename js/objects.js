@@ -120,33 +120,27 @@
      *   `showBookInfo` function.
      */
     function createBook(){
-
-        var input = {title:"", author:{firstName:"", lastName:""}};
         var books = [];
-
         do {
-
+            var input = {title:"", author:{firstName:"", lastName:""}};
             input.title = prompt("What is the title of the book?");
             input.author.firstName = prompt("What is the first name of the author?");
             input.author.lastName = prompt("What is the last name of the author?");
-            var moreBooks = confirm("Do you want to add another book?");
-
             books.push(input);
-
+            var moreBooks = confirm("Do you want to add another book?");
         }while(moreBooks === true);
-
         return books;
     }
-    var books = createBook();
-
-    function showBookInfo(books){
-        for (var i = 0; i < books.length; i++){
+    var booksLog = createBook();
+    console.log(booksLog);
+    function showBookInfo(booksLog){
+        for (var i = 0; i < booksLog.length; i++){
             console.log("Book #" + (i+1));
-            console.log("Title: " + books[i].title);
-            console.log("Author: " + books[i].author.firstName + " " + books[i].author.lastName);
+            console.log("Title: " + booksLog[i].title);
+            console.log("Author: " + booksLog[i].author.firstName + " " + booksLog[i].author.lastName);
             console.log("---");
-            return
         }
+        return
     }
-    console.log(showBookInfo(books));
+    showBookInfo(booksLog);
 })();
