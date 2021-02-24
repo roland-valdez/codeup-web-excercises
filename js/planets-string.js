@@ -27,11 +27,13 @@
      */
     var planetsLineBreak = planetsArray.join("<br>");
     console.log(planetsLineBreak);
-    var planetsList = "";
-    for (var i = 0; i < planetsArray.length; i++) {
-        planetsList = planetsList + "<li>" + planetsArray[i] + "</li>";
-    }
-    planetsList = "<ul>" + planetsList + "</ul>";
+    var planetsList = "<ul><li>" + planetsArray.join("</li><li>") + "</ul>"; // did not need for loop if i had only used what we covered
+
+    // var planetsList = "";
+    // for (var i = 0; i < planetsArray.length; i++) {
+    //     planetsList = planetsList + "<li>" + planetsArray[i] + "</li>";
+    // }
+    // planetsList = "<ul>" + planetsList + "</ul>";
     console.log(planetsList);
     console.log("It would be helpful so that an array that was input could be displayed on a webpage as a list")
 })();
