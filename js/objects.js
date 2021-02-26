@@ -26,7 +26,7 @@
      * > console.log(person.sayHello()) // "Hello from Rick Sanchez!"
      */
     person.sayHello = function() {
-        console.log("Hello from " + person.firstName + " " + person.lastName + "!")
+        console.log("Hello from " + this.firstName + " " + this.lastName + "!")
     }
     person.sayHello();
 
@@ -49,16 +49,16 @@
         {name: 'Ryan', amount: 250},
         {name: 'George', amount: 320}
     ];
-    for (var i = 0; i < shoppers.length; i++) {
-        if (shoppers[i].amount > 200){
-            var discountAmount = shoppers[i].amount * 0.12;
-            var discountTotal = shoppers[i].amount - discountAmount;
-            console.log("Hello " + shoppers[i].name + " your total before discount is $" + shoppers[i].amount.toFixed(2) + " and you will receive a discount of $" + discountAmount.toFixed(2) + " so your total purchase amount after discount is $" + discountTotal.toFixed(2) + ".")
+    shoppers.forEach(function(shopper){
+        if (shopper.amount > 200){
+            var discountAmount = shopper.amount * 0.12;
+            var discountTotal = shopper.amount - discountAmount;
+            console.log("Hello " + shopper.name + " your total before discount is $" + shopper.amount.toFixed(2) + " and you will receive a discount of $" + discountAmount.toFixed(2) + " so your total purchase amount after discount is $" + discountTotal.toFixed(2) + ".")
         }
         else {
-            console.log("Hello " + shoppers[i].name + " you did not purchase enough to receive a discount so your total will be $" + shoppers[i].amount.toFixed(2) + ".")
+            console.log("Hello " + shopper.name + " you did not purchase enough to receive a discount so your total will be $" + shopper.amount.toFixed(2) + ".")
         }
-    }
+    });
 
     /** TODO:
      * Create an array of objects that represent books and store it in a
@@ -103,12 +103,15 @@
     //  *      ---
     //  *      ...
     //  */
-    for (var i = 0; i < books.length; i++){
-        console.log("Book #" + (i+1));
-        console.log("Title: " + books[i].title);
-        console.log("Author: " + books[i].author.firstName + " " + books[i].author.lastName);
-        console.log("---");
-    }
+    //
+
+    books.forEach(function(books, index){
+    showBookInfo(books, index);//refactored from bonus problem
+    //     console.log("Book #" + (index + 1));
+    //     console.log("Title: " + books.title);
+    //     console.log("Author: " + books.author.firstName + " " + books.author.lastName);
+    //     console.log("---");
+    });
     /**
      * Bonus:
      * - Create a function named `createBook` that accepts a title and author
@@ -119,6 +122,18 @@
      *   outputs the information described above. Refactor your loop to use your
      *   `showBookInfo` function.
      */
+    // function createBook(){
+    //     var books = [];
+    //     do {
+    //         var input = {title:"", author:{firstName:"", lastName:""}};
+    //         input.title = prompt("What is the title of the book?");
+    //         input.author.firstName = prompt("What is the first name of the author?");
+    //         input.author.lastName = prompt("What is the last name of the author?");
+    //         books.push(input);
+    //         var moreBooks = confirm("Do you want to add another book?");
+    //     }while(moreBooks === true);
+    //     return books;
+    // }
     function createBook(){
         var books = [];
         do {
@@ -131,16 +146,18 @@
         }while(moreBooks === true);
         return books;
     }
-    var booksLog = createBook();
-    console.log(booksLog);
-    function showBookInfo(booksLog){
-        for (var i = 0; i < booksLog.length; i++){
-            console.log("Book #" + (i+1));
-            console.log("Title: " + booksLog[i].title);
-            console.log("Author: " + booksLog[i].author.firstName + " " + booksLog[i].author.lastName);
+
+    function showBookInfo(booksLog, index){
+            console.log("Book #" + (index + 1));
+            console.log("Title: " + booksLog.title);
+            console.log("Author: " + booksLog.author.firstName + " " + booksLog.author.lastName);
             console.log("---");
-        }
-        return
     }
-    showBookInfo(booksLog);
+
+    var booksLog = createBook();
+
+    booksLog.forEach(function (booksLog, index){
+        showBookInfo(booksLog, index);
+    });
+
 })();
