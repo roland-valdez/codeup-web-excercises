@@ -2,3 +2,25 @@
     color:red;
     text-shadow: cornflowerblue 2px 2px;
 }
+h2 {
+    color: orangered;
+    background-color: yellow;
+}
+ul li {
+    color: sandybrown;
+}
+ol li {
+    color: red;
+}
+img {
+    border-radius: 10px;
+    border: 10px solid darkorange;
+    padding: 15px;
+}
+
+th {
+    color: palevioletred;
+}
+tr {
+    color: cornflowerblue;
+}
