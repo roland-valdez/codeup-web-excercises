@@ -14,8 +14,8 @@ ol li {
 }
 img {
     border-radius: 10px;
-    border: 10px solid darkorange;
-    padding: 15px;
+    border: 5px ridge darkorange;
+    padding: 1px;
 }
 
 th {
