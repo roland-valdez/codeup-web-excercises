@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap');
+
 .fancy-header {
     color:red;
     text-shadow: cornflowerblue 2px 2px;
+    text-align: center;
 }
 h2 {
     color: orangered;
     background-color: yellow;
+    text-decoration: underline;
 }
 ul li {
     color: sandybrown;
@@ -14,8 +18,8 @@ ol li {
 }
 img {
     border-radius: 10px;
-    border: 10px solid darkorange;
-    padding: 15px;
+    border: 5px ridge darkorange;
+    padding: 1px;
 }
 
 th {
@@ -23,4 +27,38 @@ th {
 }
 tr {
     color: cornflowerblue;
+}
+html{
+    background: red;
+    background-image: url("img/worlwide.jpeg");
+    background-size: 100% 100%;
+    font-family: 'Calligraffitti', cursive;
+
+}
+ul li {
+    list-style: circle;
+}
+ol li {
+    list-style: upper-roman;
+}
+a:hover{
+    text-decoration: line-through;
+}
+a:link{
+    color:pink;
+}
+a:visited{
+    color:red;
+}
+a:active{
+    font-size: 2rem;
+}
+table {
+    padding: 50px;
+    width: 20%
+
+}
+th td tr {
+    text-align: center;
+
 }
