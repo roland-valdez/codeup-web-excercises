@@ -57,7 +57,6 @@ fieldset {
     padding: 8px;
     color: white;
     font-weight: bold;
-    font-family: comi;
     border: 1px lightgray;
     /* There must be a separation of 8px between the text and the border of this element */
     /* The text color of this element should be white and bold */
@@ -66,9 +65,9 @@ fieldset {
 }
 
 .form-control {
-    padding: 4px 0px;
-    margin: 0.5em;
-    width: calc(100% / 6);
+    padding: 4px 0;
+    margin: 0.5em 0;
+    width: calc(100% - 4px);
 
     /* There must be 4px on top of the text and below the text of an input with this class */
     /* It should have a separation of .5em from elements on top of it and below it */
@@ -77,7 +76,7 @@ fieldset {
     /* See the example at: https://developer.mozilla.org/en-US/docs/Web/CSS/calc */
     /* HINT: Calculate based on the padding of the `.btn` class */
     /* HINT: Examples are available at: https://glitch.com/~input-button-width */
-    width: 100%;
+    /*width: 100%;*/
 }
 
 
