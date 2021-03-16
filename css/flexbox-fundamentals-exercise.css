@@ -35,11 +35,14 @@ h2, h3 {
     background: white;
     padding: 1em;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* enter needed declarations here */
 }
 
 section {
-    display:flex;
-    margin: 10px 0;
+    display:flex;/* enter needed declarations here */
 
 
 }
@@ -48,7 +51,7 @@ section:nth-of-type(1) {
     height: 3em;
     background: lightgreen;
     justify-content: space-between;
-    align-items: center;/* enter needed declarations here */
+    align-items: center;
 }
 section:nth-of-type(1) div:last-child {
    align-self: flex-start;/* enter needed declarations here */
@@ -66,7 +69,7 @@ section:nth-of-type(1) div:last-child {
 }
 
 .purple-box:nth-of-type(2) {
-    flex-grow: 2;/* enter needed declarations here */
+    flex-grow: 1;/* enter needed declarations here */
 }
 
 .blue-box {
@@ -81,7 +84,7 @@ section:nth-of-type(3) {
 }
 
 section:nth-of-type(3) h3 {
-    flex-grow: 2/* enter needed declarations here */
+    flex-grow: 1/* enter needed declarations here */
 
 }
 
@@ -119,7 +122,7 @@ section:nth-of-type(6) {
     height: 14em;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-content: space-around;
+    /*align-content: space-around;*/
     align-items: center;/* enter needed declarations here */
 }
 

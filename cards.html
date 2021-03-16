@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Roboto;
+            background: orange;
+        }
+        h1, h2, h3 {
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+        h3 {
+            color: grey;
+        }
+        hr {
+            border-top: 1px solid whitesmoke;
+            width: 90px;
+        }
+        .card {
+            margin: .5em;
+            border-radius: 2px;
+            background: white;
+            width: 250px;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+        img {
+            border-radius: 120px;
+            width: 120px;
+        }
+        .icons {
+            /* the following declarations control the spacing between the social media icons */
+            width: 160px;
+            display: flex;
+            justify-content: space-evenly;
+        }
+        i {
+            color: grey;
+        }
+        .text-section {
+            position: relative;
+            bottom: 1.5em;
+        }
+        .icons i {
+            font-size: 2.2em;
+        }
+        .boundary{
+            background: darkorange;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            margin: 0 auto;
+            max-width: 80%;
+            padding: 5vw;
+        }
+        /*.h1-boundary{*/
+        /*    display: flex;*/
+        /*    flex-direction: row;*/
+        /*    justify-content: space-evenly;*/
+        /*    flex-wrap: wrap;*/
+        /*    margin: 0 auto;*/
+        /*    background-color: darkorange;*/
+        /*    max-width: 80%;*/
+
+        /*}*/
+        header, main {
+            width: 80%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1em;
+            background: darkorange;
+        }
+        main {
+            min-height: 100vh;
+            /*
+                the following declarations control the layout for all the cards,
+                creating a responsive layout
+            */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-content: flex-start;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+</head>
+<body>
+    <div class="h1-boundary">
+        <header>
+            <h1>Staff</h1>
+        </header>
+        <main>
+            <div class="boundary">
+                <article class="card">
+                    <section>
+                        <img src="img/profile.png" alt="profile-image" >
+                    </section>
+                    <section class="text-section">
+                        <h2>Ron Swanson</h2>
+                        <h3>Director</h3>
+                        <hr>
+                    </section>
+                    <section class="icons">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </section>
+                </article>
+                <article class="card">
+                    <section>
+                        <img src="img/profile.png" alt="profile-image" >
+                    </section>
+                    <section class="text-section">
+                        <h2>Leslie Knope</h2>
+                        <h3>Deputy Director</h3>
+                        <hr>
+                    </section>
+                    <section class="icons">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </section>
+                </article>
+                <article class="card">
+                    <section>
+                        <img src="img/profile.png" alt="profile-image" >
+                    </section>
+                    <section class="text-section">
+                        <h2>April Ludgate</h2>
+                        <h3>Intern</h3>
+                        <hr>
+                    </section>
+                    <section class="icons">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </section>
+                </article>
+                <article class="card">
+                    <section>
+                        <img src="img/profile.png" alt="profile-image" >
+                    </section>
+                    <section class="text-section">
+                        <h2>Andy Dwyer</h2>
+                        <h3>Shoewhiner</h3>
+                        <hr>
+                    </section>
+                    <section class="icons">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </section>
+                </article>
+                <article class="card">
+                    <section>
+                        <img src="img/profile.png" alt="profile-image" >
+                    </section>
+                    <section class="text-section">
+                        <h2>Tom Haverford</h2>
+                        <h3>Administrator</h3>
+                        <hr>
+                    </section>
+                    <section class="icons">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </section>
+                </article>
+                <article class="card">
+                    <section>
+                        <img src="img/profile.png" alt="profile-image" >
+                    </section>
+                    <section class="text-section">
+                        <h2>Ann Perkins</h2>
+                        <h3>Nurse</h3>
+                        <hr>
+                    </section>
+                    <section class="icons">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </section>
+                </article>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+        }
+        nav {
+            background: #333333;
+
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            /*flex-direction: row;*/
+        }
+        #about{
+        margin-left: auto;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-family: Verdana;
+            display: inline-block;
+            padding: 1em;
+        }
+        nav a:hover {
+            background: black;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">Contact</a></li>
+        <li id="about"><a href="#">About</a></li>
+    </ul>
+</nav>
+</body>
+</html>
