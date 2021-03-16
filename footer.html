@@ -53,12 +53,18 @@
         footer .container {
             padding: 4em 0;
             height: 30em;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .icon-wrapper {
             border: 2px solid grey;
             border-radius: 2.4em;
             height: 2.4em;
             width: 2.4em;
+            display: flex;
+            /*justify-content: center;*/
+            /*align-items: center;*/
         }
         footer .top-footer a {
             text-transform: uppercase;
@@ -72,7 +78,39 @@
             height: 1px;
             background: grey;
         }
+        /******************************************/
+        .top-footer{
+        /*    width: 100%;*/
+            display: flex;
+            justify-content: space-between;
+        /*    margin-bottom: 5em;*/
+        }
+        .logo-div{
+            flex-basis: 25%;
+            position: relative;
+            bottom: 5px;
+        /*    margin-right: auto;*/
+        }
+        /*.ul-1, .ul-2, .ul-3{*/
+        /*    margin-right: 9em;*/
+        /*}*/
+        .social-media-links{
+            display: flex;
+            /*justify-content: center;*/
+        /*    margin: 5em 0 0.5em 0;*/
+        }
+        /*.bottom-footer{*/
+        footer .bottom-footer{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .icon-wrapper i{
+            margin: auto;
+        }
+        /******************************************/
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 </head>
 <body>
 <footer>
@@ -82,21 +120,21 @@
                 <h1><a href="#">Logo</a></h1>
                 <a href="#">Sologan Company</a>
             </div>
-            <ul>
+            <ul class="ul-1">
                 <li><a href="#">Weebly Themes</a></li>
                 <li><a href="#">Pre-Sale FAQS</a></li>
                 <li><a href="#">Submit a Ticket</a></li>
             </ul>
-            <ul>
+            <ul class="ul-2">
                 <li><a href="#">Services</a></li>
                 <li><a href="#">Theme Tweak</a></li>
             </ul>
-            <ul>
+            <ul class="ul-3">
                 <li><a href="#">Showcase</a></li>
                 <li><a href="#">Widgetkit</a></li>
                 <li><a href="#">Support</a></li>
             </ul>
-            <ul>
+            <ul class="ul-4">
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Contact Us</a></li>
                 <li><a href="#">Affiliates</a></li>
