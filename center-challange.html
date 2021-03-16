@@ -9,21 +9,35 @@
             border: 3px solid goldenrod;
             background-color: rebeccapurple;
             display: flex;
+            justify-content: flex-end;
             width: 100%;
-            justify-content: flex-start;
+
+        }
+        .flex-container2 {
+            text-align: center;
+            border: 3px solid goldenrod;
+            background-color: rebeccapurple;
+            display: flex;
+            width: 100%;
+            justify-content: center;
         }
         .flex-item {
             background: #BFD45D;
             padding: 1em;
             margin: .5em;
         }
+        #item2 {
+            margin-right:auto;
+        }
         #item3 {
-            margin-left: auto;
             margin-right: auto;
+
         }
         #item4 {
-            margin-left: auto;
+
+
         }
+
    </style>
 </head>
 <body>
@@ -32,6 +46,9 @@
     <div id="item2" class="flex-item">Logo</div>
     <div id="item3" class="flex-item">Center</div>
     <div id="item4" class="flex-item">Logout</div>
+</div>
+<div class="flex-container2">
+    <div id="item5" class="flex-item">Center</div>
 </div>
 </body>
 </html>
