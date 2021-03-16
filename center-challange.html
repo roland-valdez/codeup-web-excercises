@@ -9,46 +9,53 @@
             border: 3px solid goldenrod;
             background-color: rebeccapurple;
             display: flex;
-            justify-content: flex-end;
-            width: 100%;
+            flex: 1 1 100%;
 
-        }
-        .flex-container2 {
-            text-align: center;
-            border: 3px solid goldenrod;
-            background-color: rebeccapurple;
-            display: flex;
-            width: 100%;
-            justify-content: center;
         }
         .flex-item {
             background: #BFD45D;
             padding: 1em;
             margin: .5em;
         }
-        #item2 {
-            margin-right:auto;
+        .left{
+            display: flex;
+            flex-basis: 33.33%;
+            justify-content: flex-start;
         }
-        #item3 {
-            margin-right: auto;
+        .center{
+            display: flex;
+            flex-basis: 33.33%;
+            justify-content: center;
+        }.right{
+             display: flex;
+             flex-basis: 33.33%;
+             justify-content: flex-end;
+         }
+        .flex-container2 {
+            text-align: center;
+            border: 3px solid goldenrod;
+            background-color: rebeccapurple;
+            display: flex;
+            justify-content: center;
 
         }
-        #item4 {
-
-
-        }
-
    </style>
 </head>
 <body>
-<div class="flex-container">
-    <div id="item1" class="flex-item">Hamburger</div>
-    <div id="item2" class="flex-item">Logo</div>
-    <div id="item3" class="flex-item">Center</div>
-    <div id="item4" class="flex-item">Logout</div>
-</div>
-<div class="flex-container2">
-    <div id="item5" class="flex-item">Center</div>
-</div>
+    <div class="flex-container">
+        <div class="left">
+            <div id="item1" class="flex-item">Hamburger</div>
+            <div id="item2" class="flex-item">Logo</div>
+        </div>
+        <div class="center">
+            <div id="item3" class="flex-item">Center</div>
+            </div>
+        <div class="right">
+            <div id="item4" class="flex-item">Logout</div>
+        </div>
+    </div>
+    <div class="flex-container2">
+            <div id="item3" class="flex-item">Center</div>
+    </div>
 </body>
 </html>
