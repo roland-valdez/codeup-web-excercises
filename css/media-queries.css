@@ -4,15 +4,15 @@
     padding:0;
 }
 body{
-    /*width: 100vw;*/
+    font-family: sans-serif;
 }
 .alert-info{
     background-color: aqua;
     border: 2px lightgray solid;
     text-align: center;
-    padding: 0.5em 0;
-    font-size: 1.5em;
-    margin: 0.5em  .5em 1em .5em;
+    padding: 0.75em 0;
+    font-size: .75em;
+    margin: 0.5em  .5em .5em .5em;
 }
 .alert-info a {
     text-decoration: none;
@@ -20,16 +20,14 @@ body{
 }
 h1 {
     text-align: center;
-    font-size: 4em;
-    margin: 0.5em 0;
+    font-size: 3em;
+    margin: 0.25em 0 .75em 0;
 }
 .nav-links{
-    display: flex;
-    flex-direction: column;
     list-style: none;
-    margin:2em 0;
+    margin:.25em 0;
     padding:0;
-    font-size: 1.5em;
+    font-size: 1em;
 }
 .nav-links li {
     margin: .5em;
@@ -38,16 +36,19 @@ h1 {
     text-align: center;
 }
 .header-img{
-    margin: 1em;
-    text-align: center;
+   text-align: center;
 }
 .main, .sub-section, footer {
     margin: 1em;
+}
+.main h2{
+    margin: .5em 0;
 }
 footer {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    margin-top: 5em;
 }
 #social-media-links{
     display: flex;
@@ -57,13 +58,21 @@ footer {
 i {
     margin: 0 1em;
 }
+.sub-section {
+    font-style: italic;
+    font-size: 0.75em;
+}
+.sub-section h2{
+    margin: .5em 0;
+}
 /********************   media @ 576px  ************************************/
 @media screen and (min-width: 576px){
     .hidden-on-desktop {
         display: none;
     }
     .nav-links {
-        flex-direction: row;
+        display: flex;
+        /*flex-direction: row;*/
         justify-content: flex-end;
         margin: 0;
         width: 100%;
@@ -78,23 +87,24 @@ i {
         margin: .5em;
         padding: 1em 0;
         background-color: initial;
-        font-size: initial;
+        font-size: .75em;
     }
     h1 {
         display: inline-block;
         width: 46vw;
         text-align: left;
         margin: 0.5em 0 1em 1em;
+        font-size: 2em;
     }
     .main {
         display: inline-block;
-        width: 48vw;
-        margin: 1.5em 0 1.5em 1em;
+        width: 58vw;
+        margin: 1.5em .25em 1.5em 1em;
     }
     .sub-section {
         display: inline-block;
-        width: 48vw;
-        margin: 1.5em 1em 1.5em 0;
+        width: 38vw;
+        margin: 1.5em 1em 1.5em .25em;
     }
     .header-img img {
         width: 890px;
@@ -102,6 +112,9 @@ i {
     }
     i {
         margin: 0 1em;
+    }
+    footer{
+        margin-top: 10em;
     }
 
 }
