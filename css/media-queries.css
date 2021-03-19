@@ -3,17 +3,18 @@
     margin:0;
     padding:0;
 }
+body{
+    /*width: 100vw;*/
+}
 .alert-info{
     background-color: aqua;
-    color: black;
     border: 2px lightgray solid;
-    text-decoration: none;
     text-align: center;
     padding: 0.5em 0;
     font-size: 1.5em;
     margin: 0.5em  .5em 1em .5em;
 }
-.nav-links a {
+.alert-info a {
     text-decoration: none;
     color: black;
 }
@@ -23,17 +24,84 @@ h1 {
     margin: 0.5em 0;
 }
 .nav-links{
+    display: flex;
+    flex-direction: column;
     list-style: none;
     margin:2em 0;
     padding:0;
-    text-align:center;
-
-}
-.nav-links {
-   /*margin: 5em 0;*/
     font-size: 1.5em;
+}
+.nav-links li {
+    margin: .5em;
+    padding: 1em 0;
+    background-color: lightgray;
+    text-align: center;
 }
 .header-img{
     margin: 1em;
     text-align: center;
+}
+.main, .sub-section, footer {
+    margin: 1em;
+}
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+#social-media-links{
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+}
+i {
+    margin: 0 1em;
+}
+/********************   media @ 576px  ************************************/
+@media screen and (min-width: 576px){
+    .hidden-on-desktop {
+        display: none;
+    }
+    .nav-links {
+        flex-direction: row;
+        justify-content: flex-end;
+        margin: 0;
+        width: 100%;
+    }
+    nav {
+        display: inline-flex;
+        width: 46vw;
+        margin: 0.5em 1em 1em 0;
+        padding: 0;
+    }
+    .nav-links li {
+        margin: .5em;
+        padding: 1em 0;
+        background-color: initial;
+        font-size: initial;
+    }
+    h1 {
+        display: inline-block;
+        width: 46vw;
+        text-align: left;
+        margin: 0.5em 0 1em 1em;
+    }
+    .main {
+        display: inline-block;
+        width: 48vw;
+        margin: 1.5em 0 1.5em 1em;
+    }
+    .sub-section {
+        display: inline-block;
+        width: 48vw;
+        margin: 1.5em 1em 1.5em 0;
+    }
+    .header-img img {
+        width: 890px;
+        height: 385px;
+    }
+    i {
+        margin: 0 1em;
+    }
+
 }
