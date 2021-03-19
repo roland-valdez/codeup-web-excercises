@@ -1,0 +1,120 @@
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+body{
+    font-family: sans-serif;
+}
+.alert-info{
+    background-color: aqua;
+    border: 2px lightgray solid;
+    text-align: center;
+    padding: 0.75em 0;
+    font-size: .75em;
+    margin: 0.5em  .5em .5em .5em;
+}
+.alert-info a {
+    text-decoration: none;
+    color: black;
+}
+h1 {
+    text-align: center;
+    font-size: 3em;
+    margin: 0.25em 0 .75em 0;
+}
+.nav-links{
+    list-style: none;
+    margin:.25em 0;
+    padding:0;
+    font-size: 1em;
+}
+.nav-links li {
+    margin: .5em;
+    padding: 1em 0;
+    background-color: lightgray;
+    text-align: center;
+}
+.header-img{
+   text-align: center;
+}
+.main, .sub-section, footer {
+    margin: 1em;
+}
+.main h2{
+    margin: .5em 0;
+}
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 5em;
+}
+#social-media-links{
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+}
+i {
+    margin: 0 1em;
+}
+.sub-section {
+    font-style: italic;
+    font-size: 0.75em;
+}
+.sub-section h2{
+    margin: .5em 0;
+}
+/********************   media @ 576px  ************************************/
+@media screen and (min-width: 576px){
+    .hidden-on-desktop {
+        display: none;
+    }
+    .nav-links {
+        display: flex;
+        /*flex-direction: row;*/
+        justify-content: flex-end;
+        margin: 0;
+        width: 100%;
+    }
+    nav {
+        display: inline-flex;
+        width: 46vw;
+        margin: 0.5em 1em 1em 0;
+        padding: 0;
+    }
+    .nav-links li {
+        margin: .5em;
+        padding: 1em 0;
+        background-color: initial;
+        font-size: .75em;
+    }
+    h1 {
+        display: inline-block;
+        width: 46vw;
+        text-align: left;
+        margin: 0.5em 0 1em 1em;
+        font-size: 2em;
+    }
+    .main {
+        display: inline-block;
+        width: 58vw;
+        margin: 1.5em .25em 1.5em 1em;
+    }
+    .sub-section {
+        display: inline-block;
+        width: 38vw;
+        margin: 1.5em 1em 1.5em .25em;
+    }
+    .header-img img {
+        width: 890px;
+        height: 385px;
+    }
+    i {
+        margin: 0 1em;
+    }
+    footer{
+        margin-top: 10em;
+    }
+
+}
