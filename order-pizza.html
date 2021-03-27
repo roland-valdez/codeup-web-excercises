@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/custom.css">
     <title>Pizza World</title>
 </head>
@@ -18,26 +19,32 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav">
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto w-100">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Order online <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Menu</a>
                 </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
+                <form class="form-inline my-2 my-lg-0 mr-auto">
                 <input class="form-control mr-sm-2" type="search" placeholder="Zipcode" aria-label="Search">
                 <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search stores near you</button>
-            </form>
+                </form>
+                <li>
+<!--                    why wont ml-auto work-->
+                    <a href="" class="nav-link "><i class="fas fa-user"></i>Sign Up</a>
+                </li>
+            </ul>
+
         </div>
     </nav>
 
     <main class="main-container">
-        <div class="jumbotron jumbotron-fluid">
+        <div class="jumbotron d-none d-sm-block">
+<!--            needs to be fixed-->
             <div class="container">
-                <h1 class="display-4 text-center">Welcome to Pizza World!</h1>
+                <h1 class="text-center w-100">Welcome to Pizza World!</h1>
             </div>
         </div>
 
@@ -56,11 +63,13 @@
                     <span class="sr-only">unread messages</span>Toppings</a>
             </li>
         </ul>
+
+        <form action="https://www.elformo.com/forms/06b0d7e9-f6a9-4c26-ba61-81a4ed897a31" method="POST">
         <div class="tab-content" id="myTabContent">
 <!--            pane 1-->
             <div class="tab-pane fade show active" id="size" role="tabpanel" aria-labelledby="size-tab">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary">
                         Choose size and crust
                     </div>
                     <div class="card-body">
@@ -70,8 +79,8 @@
                             </div>
                             <ul class="list-group list-group-flush form-check">
                                 <li class="list-group-item">Garlic seasoned crust with a rich, buttery taste.</li>
-                                <li class="list-group-item mx-3"><input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">Small(10")</li>
-                                <li class="list-group-item mx-3"><input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio2" value="option1" aria-label="...">Medium(12")</li>
+                                <li class="list-group-item mx-3"><input class="form-check-input position-static" type="radio" name="crust" id="hand-sm" value="option1" aria-label="...">Small(10")</li>
+                                <li class="list-group-item mx-3"><input class="form-check-input position-static" type="radio" name="crust" id="hand-md" value="option1" aria-label="...">Medium(12")</li>
                             </ul>
                         </div>
                         <br>
@@ -81,8 +90,9 @@
                             </div>
                             <ul class="list-group list-group-flush form-check">
                                 <li class="list-group-item">Thin enough for optimum crispy to crunchy ratio.</li>
-                                <li class="list-group-item mx-3"><input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio3" value="option1" aria-label="...">Small(10")</li>
-                                <li class="list-group-item mx-3"><input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio4" value="option1" aria-label="...">Medium(12")</li>
+<!--                                need to figure out classes form-check-input-->
+                                <li class="list-group-item mx-3"><input class="form-check-input position-static" type="radio" name="crust" id="thin-md" value="option1" aria-label="...">Medium(12")</li>
+                                <li class="list-group-item mx-3"><input class="form-check-input position-static" type="radio" name="crust" id="thin-lg" value="option1" aria-label="...">Large(14")</li>
                             </ul>
                         </div>
                         <div class="card-footer text-right">
@@ -94,7 +104,7 @@
 <!--            pane 2-->
             <div class="tab-pane fade" id="cheese" role="tabpanel" aria-labelledby="cheese-tab">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary">
                         Choose Cheese and Sauce
                     </div>
                     <div class="card-body">
@@ -103,23 +113,43 @@
                                 Cheese
                             </div>
                             <ul class="list-group list-group-flush form-check">
-                                <li class="list-group-item">How Much?</li>
-                                <li class="list-group-item mx-3"><input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">Small(10")</li>
-                                <li class="list-group-item mx-3"><input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio2" value="option1" aria-label="...">Medium(12")</li>
+                                <li class="list-group-item">How Much?
+                                <select class="custom-select">
+                                    <option value="1">Light</option>
+                                    <option value="2">Normal</option>
+                                    <option value="3">Extra</option>
+                                    <option value="4">Double</option>
+                                </select>
+                                </li>
                             </ul>
                         </div>
                         <br>
                         <div class="card" style="width: 100%">
-                            <div class="card-header">
+                            <div class="card-header ">
                                 Sauce
                             </div>
                             <ul class="list-group list-group-flush form-check">
-                                <li class="list-group-item">Thin enough for optimum crispy to crunchy ratio.</li>
-                                <li class="list-group-item mx-3"><input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio3" value="option1" aria-label="...">Small(10")</li>
-                                <li class="list-group-item mx-3"><input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio4" value="option1" aria-label="...">Medium(12")</li>
+                                <li class="list-group-item">What type
+                                <select class="custom-select">
+
+                                    <option value="1">Tomato sauce</option>
+                                    <option value="2">Marinara sauce</option>
+                                    <option value="3">BBQ sauce</option>
+                                    <option value="4">Alfredo Sauce</option>
+                                </select>
+                                </li>
+                                <li class="list-group-item">How Much?
+                                    <select class="custom-select">
+
+                                        <option value="1">Light</option>
+                                        <option value="2">Normal</option>
+                                        <option value="3">Extra</option>
+                                    </select>
+                                </li>
                             </ul>
                         </div>
                         <div class="card-footer text-right">
+                            <a href="#" class="btn btn-primary">< Previous Step</a>
                             <a href="#" class="btn btn-primary">Next Step ></a>
                         </div>
                     </div>
@@ -128,7 +158,7 @@
 <!--            pane 3-->
             <div class="tab-pane fade" id="toppings" role="tabpanel" aria-labelledby="toppings-tab">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary">
                         Choose Toppings
                     </div>
                     <div class="card-body">
@@ -136,10 +166,39 @@
                             <div class="card-header">
                                 Choose Meats
                             </div>
-                            <ul class="list-group list-group-flush form-check">
-                                <li class="list-group-item">How Much?</li>
-                                <li class="list-group-item mx-3"><input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">Small(10")</li>
-                                <li class="list-group-item mx-3"><input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio2" value="option1" aria-label="...">Medium(12")</li>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="beef">
+                                        <label class="form-check-label" for="beef">
+                                            Beef
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="ham">
+                                    <label class="form-check-label" for="ham">
+                                        Ham
+                                    </label>
+                                </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="philly">
+                                        <label class="form-check-label" for="philly">
+                                            Philly Steak
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="bacon">
+                                        <label class="form-check-label" for="bacon">
+                                            Bacon
+                                        </label>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                         <br>
@@ -147,20 +206,49 @@
                             <div class="card-header">
                                 Choose non meats
                             </div>
-                            <ul class="list-group list-group-flush form-check">
-                                <li class="list-group-item">Thin enough for optimum crispy to crunchy ratio.</li>
-                                <li class="list-group-item mx-3"><input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio3" value="option1" aria-label="...">Small(10")</li>
-                                <li class="list-group-item mx-3"><input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio4" value="option1" aria-label="...">Medium(12")</li>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="green-pepp">
+                                        <label class="form-check-label" for="green-pepp">
+                                            Green Peppers
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="mushroom">
+                                        <label class="form-check-label" for="mushroom">
+                                            Mushrooms
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="onion">
+                                        <label class="form-check-label" for="onion">
+                                            Onions
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="jalapeno">
+                                        <label class="form-check-label" for="jalapeno">
+                                            Jalapeno Peppers
+                                        </label>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                         <div class="card-footer text-right">
-                            <a href="#" class="btn btn-primary">Next Step ></a>
+                            <a href="#" class="btn btn-primary">Checkout <i class="fas fa-shopping-cart"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        </form>
 
 
 
