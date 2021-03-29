@@ -45,7 +45,7 @@ locateElements("hat-searchs");
 
 // TODO: Howell's doesn't sound like the name you'd give your hat shop - let's change the innerText of that in our navigation bar to your own name.
 var nameChange = document.getElementsByClassName("navbar-brand");
-nameChange[0].innerText = "Roland's";
+nameChange[0].innerHTML = "Roland's <i class='bi-shop mx-1'></i>";
 
 // TODO: There's only one ordered list on the page - can you get into that ordered list and use innerHTML to change the list items within that ordered list to what you think the top sellers were?
 var hatsSold = document.getElementsByClassName("hat-sold");
@@ -55,7 +55,7 @@ hatsSold[2].innerText = "We don't sell hats";
 
 // TODO (BONUS): I have two "special-offer" classes used in my table - grab those classes by name, store them into a variable, and then use a loop to replace the innerHTML. The new table data should have strings that let our customers know that "New discounts are coming soon!"
 var specials = document.getElementsByClassName('special-offer');
-console.log(specials)
+
 for (i = 0; i < specials.length; i++){
 specials[i].innerHTML = "<td class='d-flex justify-content-center w-100'>New discounts are coming soon!</td>";
 }
@@ -69,6 +69,11 @@ removeDemo2.removeAttribute("id");
 removeDemo2.setAttribute("id", "navbar-collapser");
 
 // TODO: Now, get into that button element that makes reference to our old "navbarTogglerDemo02" ids and change those attributes to match. Refactor complete!
+var removeDemoAttribute = document.getElementsByTagName("button");
+
+removeDemoAttribute[0].setAttribute('data-target', "navbar-collapser");
+
+removeDemoAttribute[0].setAttribute('aria-controls', "navbar-collapser");
 
 
 // style
