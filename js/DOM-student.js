@@ -69,6 +69,11 @@ removeDemo2.removeAttribute("id");
 removeDemo2.setAttribute("id", "navbar-collapser");
 
 // TODO: Now, get into that button element that makes reference to our old "navbarTogglerDemo02" ids and change those attributes to match. Refactor complete!
+var removeDemoAttribute = document.getElementsByTagName("button");
+
+removeDemoAttribute[0].setAttribute('data-target', "navbar-collapser");
+
+removeDemoAttribute[0].setAttribute('aria-controls', "navbar-collapser");
 
 
 // style
