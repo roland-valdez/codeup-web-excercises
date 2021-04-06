@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konami Code</title>
+</head>
+<body>
+<h1>Konami Code</h1>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script>
+    "use strict";
+var konami = 1;
+var code = [40,40,38,38,37,39,65,66,13];
+    $(document).keyup(function(event){
+        console.log(event.keyCode);
+        if (!code.includes(event.keyCode)){
+            konami = 1;
+            alert("Key is not part of Konami code!");
+        }else if (event.keyCode === 40 && (konami >= 1 && konami <= 2)){
+            konami++;
+        }else if (event.keyCode === 38 && (konami >= 3 && konami <= 4)){
+            konami++;
+        }else if (event.keyCode === 37 && (konami === 5 || konami === 7)){
+            konami++;
+        }else if (event.keyCode === 39 && (konami === 6 || konami === 8)){
+            konami++;
+        }else if (event.keyCode === 66 && konami === 9 ){
+            konami++;
+        }else if (event.keyCode === 65 && konami === 10 ){
+            konami++;
+        }else if (event.keyCode === 13 && konami === 11){
+            $('body').css('background', 'url(img/contra.jpeg)');
+            $(document).ready(function(){
+                alert("You have added 30 lives!");
+            });
+            $(document).off();
+        }
+        else {
+            alert("Code is not in sequence");
+            konami = 1;
+        }
+    });
+</script>
+</body>
+</html>
