@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+</head>
+<body>
+
+<h1 class="jumbotron text-primary text-center">My Tool Store</h1>
+<button id="refresh" class="btn btn-primary my-2">Refresh Inventory</button>
+<table class="table table-striped table-hover" id="products">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Categories</th>
+        </tr>
+    </thead>
+    <tbody id="insertProducts"></tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script>
+(function() {
+    "use strict";
+    // TODO: Create an AJAX GET request for the file under data/inventory.json
+    // var toolsInventory = $.ajax("data/inventory.json");
+
+    // TODO: Take the data from inventory.json and append it to the products table
+
+    //       HINT: Your data should come back as a JSON object; use console.log() to inspect
+    //             its contents and fields
+    //       HINT: You will want to target #insertProducts for your new HTML elements
+function inventory() {
+    $.ajax("data/inventory.json").done(function (data) {
+        $.each(data, function (index, tool) {
+            var html = "";
+            html += "<tr>";
+            html += "<td>" + tool.title + "</td>";
+            html += "<td>" + tool.quantity + "</td>";
+            html += "<td>" + tool.price + "</td>";
+            html += "<td>" + tool.categories + "</td>";
+            html += "</tr>";
+            $("#insertProducts").append(html);
+        })
+    });
+}
+inventory();
+
+    $("#refresh").click(function(e){
+        console.log("clicked");
+        $("#insertProducts").html("");
+        inventory();
+
+    });
+})();
+</script>
+
+</body>
+</html>
