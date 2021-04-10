@@ -19,7 +19,7 @@ var mapOptions = {
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/streets-v11', // style URL-->
     center: [-98.4861, 29.4252], // starting position [lng, lat]-->
-    zoom: 14// starting zoom-->
+    zoom: 10// starting zoom-->
 }
 // var map = new mapboxgl.Map({
 //     container: 'map', // container ID
@@ -45,18 +45,18 @@ var map = new mapboxgl.Map(mapOptions);
 
 
 // TODO TOGETHER: Add a marker to the map using the following coordinates [-98.4861, 29.4260]. This marker will mark the Alamo on our map.
-var alamoMarker = new mapboxgl.Marker()
-    .setLngLat([-98.4861, 29.4252])
+var alamoMarker = new mapboxgl.Marker({color: "red"})
+    .setLngLat([-98.4861, 29.4260])
     .addTo(map);
 
 // TODO TOGETHER: Change the color of the marker
 
 // Set options
-var unknownMarker = new mapboxgl.Marker({
-    color: "red",
-    draggable: false
-}).setLngLat([-98.4899, 29.4268])
-    .addTo(map);
+// var unknownMarker = new mapboxgl.Marker({
+//     color: "red",
+//     draggable: false
+// }).setLngLat([-98.4899, 29.4268])
+//     .addTo(map);
 
 // TODO: Make a new marker! Let's experiment with the color and setting the LngLat [how about a marker for Codeup San Antone? -98.4895, 29.4267 Codeup Dallas? -96.8056, 32.7786]
 var codeupSA = new mapboxgl.Marker({
@@ -70,11 +70,11 @@ var codeupDFW = new mapboxgl.Marker({
 }).setLngLat([-96.8056, 32.7786])
     .addTo(map);
 // TODO: Update the marker object to make the marker draggable. *Hint: reference the docs!
-var alamoDome = new mapboxgl.Marker({
-    color: "black",
-    draggable: true
-}).setLngLat([-98.4788, 29.4170])
-    .addTo(map);
+// var alamoDome = new mapboxgl.Marker({
+//     color: "black",
+//     draggable: true
+// }).setLngLat([-98.4788, 29.4170])
+//     .addTo(map);
 /**********************************************
  * 					POPUPS
  *********************************************/
@@ -83,11 +83,11 @@ var alamoDome = new mapboxgl.Marker({
 
 
 // TODO TOGETHER: Add a popup to the map over San Antonio's Codeup. Set the html as a paragraph that says "Codeup Rocks!"
-var popupDome = new mapboxgl.Popup()
-    // .setLngLat([-98.4788, 29.4170])
-    .setHTML("<h6>Alamo Dome!</h6>")
-
-alamoDome.setPopup(popupDome);
+// var popupDome = new mapboxgl.Popup()
+//     // .setLngLat([-98.4788, 29.4170])
+//     .setHTML("<h6>Alamo Dome!</h6>")
+//
+// alamoDome.setPopup(popupDome);
 
 // TODO TOGETHER: We'll comment out the popup we just added. Next, let's add a popup to the Alamo marker!
 
@@ -99,6 +99,10 @@ codeupSA.setPopup(popupCodeup);
 
 
 // TODO: Review the popup docs. What are some additional options we can pass to the popup? Choose one and experiment with implementing that option to a popup!
+// Store the marker's longitude and latitude coordinates in a variable
+// var lngLat = alamoDome.getLngLat();
+// // Print the marker's longitude and latitude values in the console
+// console.log('Longitude: ' + lngLat.lng + ', Latitude: ' + lngLat.lat )
 
 // TODO: Try setting the text of a popup by using ".setText()" instead of ".setHTML()" - what happens with HTML tags between the two?
 
@@ -114,6 +118,13 @@ codeupSA.setPopup(popupCodeup);
 // TODO TOGETHER: Using the Geocoder helper function, log the coordinates of Codeup and recenter the map to focus on Codeup.
 //https://docs.mapbox.com/mapbox-gl-js/api/map/#map#setcenter
 
+// geocode("San Benito, TX", mapboxToken).then(function(results) {
+//     map.flyTo({center: results, zoom: 12});
+//     var SBmarker = new mapboxgl.Marker()
+//         .setLngLat(results)
+//         .addTo(map);
+// });
+
 //TODO: Using the geocode method above, add a marker at Codeup to the map
 
 
@@ -123,6 +134,14 @@ codeupSA.setPopup(popupCodeup);
 
 
 // TODO TOGETHER: Reverse Geocoding: Using the reverse geocoding method, enter the coordinates {lng: -98.4861, lat: 29.4260} to get a physical address for the Alamo
+
+reverseGeocode({lng: -98.4861, lat: 29.4260}, mapboxToken).then(function(results) {
+    map.flyTo({center: [-98.4861, 29.4260], zoom: 17});
+    var alamoPopUp = new mapboxgl.Popup()
+        .setText(results)
+
+    alamoMarker.setPopup(alamoPopUp);
+});
 
 // TODO: Reverse geocode coordinates of your choice using the reverse geocode method
 
