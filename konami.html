@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Konami Code</h1>
-
+<main class="audio"></main>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script>
     "use strict";
@@ -29,10 +29,12 @@ var code = [40,40,38,38,37,39,65,66,13];
         }else if (event.keyCode === 65 && konami === 10 ){
             konami++;
         }else if (event.keyCode === 13 && konami === 11){
-            $('body').css('background', 'url(img/contra.jpeg)');
+            $('body').css("background-image", "url(img/contra.jpeg)");
             $(document).ready(function(){
                 alert("You have added 30 lives!");
             });
+            var audio = new Audio('audio/Contra_Jungle_Theme.mp3');
+            audio.play();
             $(document).off();
         }
         else {
