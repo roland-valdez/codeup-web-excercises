@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Roland's Favorite Restuarants</title>
 
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
@@ -20,7 +20,58 @@
 <script src="js/keys.js"></script>
 <script src="js/mapbox-geocoder-utils.js"></script>
 <script>
+    mapboxgl.accessToken = mapboxToken;
+    var mapOptions = {
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-98.4861, 29.4252], // San Antonio
+        zoom: 9.7// captures all of 1604 Loop
+    }
+    var map = new mapboxgl.Map(mapOptions);
 
+    // geocode("18318 Sonterra Pl, San Antonio, TX 78258", mapboxToken).then(function(results) {
+    // var chamaMarker = new mapboxgl.Marker({color: "red"})
+    //     .setLngLat(results)
+    //     .addTo(map);
+    // var chamaPopUp =new mapboxgl.Popup()
+    //     .setText("Chama Gaucha");
+    // chamaMarker.setPopup(chamaPopUp);
+    // });
+    //
+    // geocode("4642 Rigsby Ave, San Antonio, TX 78222", mapboxToken).then(function(results) {
+    //     var chamaMarker = new mapboxgl.Marker({color: "orange"})
+    //         .setLngLat(results)
+    //         .addTo(map);
+    //     var chamaPopUp =new mapboxgl.Popup()
+    //         .setText("Pollos Asados Los Nortenos");
+    //     chamaMarker.setPopup(chamaPopUp);
+    // });
+    //
+    // geocode("7915 W Loop 1604 N Ste 101, San Antonio, TX 78254", mapboxToken).then(function(results) {
+    //     var chamaMarker = new mapboxgl.Marker({color: "blue"})
+    //         .setLngLat(results)
+    //         .addTo(map);
+    //     var chamaPopUp =new mapboxgl.Popup()
+    //         .setText("Smokey Mo's BBQ");
+    //     chamaMarker.setPopup(chamaPopUp);
+    // });
+ var restaurants = [
+     {name:"Chama Gaúcha Brazilian Steakhouse", address:"18318 Sonterra Pl, San Antonio, TX 78258"},
+     {name: "Pollos Asados Los Nortenos", address: "4642 Rigsby Ave, San Antonio, TX 78222"},
+     {name:"Smokey Mo's BBQ", address: "7915 W Loop 1604 N Ste 101, San Antonio, TX 78254"}
+ ];
+
+ restaurants.forEach(function(place){
+     geocode(place.address, mapboxToken).then(function(results) {
+         // map.flyTo({center: results, zoom: 20})
+         var Marker = new mapboxgl.Marker({color: "blue"})
+             .setLngLat(results)
+             .addTo(map);
+         var PopUp =new mapboxgl.Popup()
+             .setText(place.name);
+         Marker.setPopup(PopUp);
+     });
+ })
 
 </script>
 
