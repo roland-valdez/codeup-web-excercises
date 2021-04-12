@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <!-- mapbox CSS and JS -->
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
+  <!-- Custom CSS -->
+  <style>
+    #map {
+      margin: 50px;
+      border: 3px solid cornflowerblue;
+    }
+    img {
+      width: 200px;
+    }
+  </style>
+  <title>Accuweather Forecast</title>
+</head>
+<body>
+<div class="jumbotron"> Accuweather</div>
+<form class="w-50 mx-5">
+  <!--  <div class="form-group">-->
+  <!--    <label for="zoom">Select map zoom level</label>-->
+  <!--    <select class="form-control" id="zoom">-->
+  <!--      <option value="5">5</option>-->
+  <!--      <option value="15">15</option>-->
+  <!--      <option value="20">20</option>-->
+  <!--    </select>-->
+  <!--  </div>-->
+  <div class="form-group">
+    <label for="location">Enter city for weather forecast:</label>
+    <input type="text" class="form-control" id="location" placeholder="San Antonio, TX">
+    <button id="weatherBtn" class="btn btn-secondary my-2">Show Me the Weather</button>
+  </div>
+  <!--  <div class="form-group">-->
+  <!--    <button id="markersOff" class="btn btn-secondary my-2">Hide markers</button>-->
+  <!--  </div>-->
+
+</form>
+<div class="row mx-1 d-flex justify-content-around">
+  <!--  //*************** WEATHER CARDS **********-->
+  <div class="col-2 card mx-1" style="width: 18rem;">
+    <img class="card-img-top" src="" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Date</h5>
+      <p class="card-text">html with current temp.</p>
+      <p class="low card-text">html with low of day.</p>
+      <p  class=" high card-text">html with high of the day.</p>
+    </div>
+  </div>
+  <div class="col-2 card mx-1" style="width: 18rem;">
+    <img class="card-img-top" src="" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Date</h5>
+      <p class="card-text">html with current temp.</p>
+      <p class="low card-text">html with low of day.</p>
+      <p  class=" high card-text">html with high of the day.</p>
+    </div>
+  </div>
+  <div class="col-2 card mx-1" style="width: 18rem;">
+    <img class="card-img-top" src="" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Date</h5>
+      <p class="card-text">html with current temp.</p>
+      <p class="low card-text">html with low of day.</p>
+      <p  class=" high card-text">html with high of the day.</p>
+    </div>
+  </div>
+  <div class="col-2 card mx-1" style="width: 18rem;">
+    <img class="card-img-top" src="" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Date</h5>
+      <p class="card-text">html with current temp.</p>
+      <p class="low card-text">html with low of day.</p>
+      <p  class=" high card-text">html with high of the day.</p>
+    </div>
+  </div>
+  <div class="col-2 card mx-1" style="width: 18rem;">
+    <img class="card-img-top" src="" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Date</h5>
+      <p class="card-text">html with current temp.</p>
+      <p class="low card-text">html with low of day.</p>
+      <p  class=" high card-text">html with high of the day.</p>
+    </div>
+  </div>
+</div>
+<!--  *************** MAP *****************-->
+<div class="row d-flex justify-content-center">
+<div class="column" id='map' style='width: 75vw; height: 50vh;'></div>
+</div>
+
+
+<!--<h1>Weather Map Project</h1>-->
+
+
+<!--<h5>Tips</h5>-->
+<!--<ul>-->
+<!--  <li>Take time to plan out your approach for each part of the project</li>-->
+<!--  <li>Commit along the way. Especially as you are starting new functionality</li>-->
+<!--  <li>You may utilize the geocoder helper methods from the previous mapbox lesson</li>-->
+<!--  <li>API Keys should be protected in your keys.js</li>-->
+<!--  <li>Read the docs!</li>-->
+<!--  <li>Get your project working, then focus on styling & refactoring</li>-->
+<!--  <li>To add mapbox autocomplete search, you will need to include geocoder scripts from mapbox</li>-->
+<!--</ul>-->
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="js/keys.js"></script>
+<script src="js/mapbox-geocoder-utils.js"></script>
+
+<script>
+  "use strict";
+  $(document).ready(function () {
+
+    var longlat = [-97.6311,26.1326]
+// ************* DISPLAY MAP ******************
+
+    mapboxgl.accessToken = mapboxToken;
+    var mapOptions = {
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: longlat, // San Antonio
+      zoom: 9.7,// captures all of 1604 Loop
+    }
+    var map = new mapboxgl.Map(mapOptions);
+// ************* GET FORECAST LOCATION ******************
+//   var latlong = [-97.6311,26.1326]
+
+// ************* GET WEATHER ******************
+    var forecast = [];
+    $.get("https://api.openweathermap.org/data/2.5/onecall", {
+      lon:longlat[0],
+      lat: longlat[1],
+      exclude: "hourly,current,minutely,hourly,alerts",
+      appid:open_weatherToken,
+      units: "imperial"
+    }).done(function (results){
+      forecast = results;
+      // console.log(forecast);
+      // ************* DISPLAY WEATHER ******************
+      // console.log(forecast.daily[0].temp);
+      forecast.daily.forEach(function(index){
+        console.log(index.temp.min);
+        console.log(index);
+        // $("#low").html("<h6>Min temp: " + forecast.daily[0].temp.min + " degF</h6>");
+        // $("#high").html("<h6>Max temp: " + forecast.daily[0].temp.max + " degF</h6>");
+      })
+
+
+
+    })
+
+
+
+  });
+
+</script>
+</body>
+</html>

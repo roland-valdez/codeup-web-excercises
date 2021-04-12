@@ -35,7 +35,7 @@
         <button id="addressCenter" class="btn btn-secondary my-2">Center</button>
     </div>
     <div class="form-group">
-        <button id="markersOff" class="btn btn-secondary my-2">Hide Markers</button>
+        <button id="markersOff" class="btn btn-secondary my-2">Hide markers</button>
     </div>
 
 </form>
@@ -49,63 +49,37 @@
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [-98.4861, 29.4252], // San Antonio
         zoom: 9.7,// captures all of 1604 Loop
-
     }
-
         var map = new mapboxgl.Map(mapOptions);
 
-    var radius = 1/500;
+    // var radius = 1/500;
 
-    // geocode("18318 Sonterra Pl, San Antonio, TX 78258", mapboxToken).then(function(results) {
-    // var chamaMarker = new mapboxgl.Marker({color: "red"})
-    //     .setLngLat(results)
-    //     .addTo(map);
-    // var chamaPopUp =new mapboxgl.Popup()
-    //     .setText("Chama Gaucha");
-    // chamaMarker.setPopup(chamaPopUp);
-    // });
-    //
-    // geocode("4642 Rigsby Ave, San Antonio, TX 78222", mapboxToken).then(function(results) {
-    //     var chamaMarker = new mapboxgl.Marker({color: "orange"})
-    //         .setLngLat(results)
-    //         .addTo(map);
-    //     var chamaPopUp =new mapboxgl.Popup()
-    //         .setText("Pollos Asados Los Nortenos");
-    //     chamaMarker.setPopup(chamaPopUp);
-    // });
-    //
-    // geocode("7915 W Loop 1604 N Ste 101, San Antonio, TX 78254", mapboxToken).then(function(results) {
-    //     var chamaMarker = new mapboxgl.Marker({color: "blue"})
-    //         .setLngLat(results)
-    //         .addTo(map);
-    //     var chamaPopUp =new mapboxgl.Popup()
-    //         .setText("Smokey Mo's BBQ");
-    //     chamaMarker.setPopup(chamaPopUp);
-    // });
+
  var restaurants = [
      {name:"Chama Gaúcha Brazilian Steakhouse", address:"18318 Sonterra Pl, San Antonio, TX 78258", html:"<img id='popupImg'src='img/chama.jpeg'><h3>If you love beef this is the place for you!</h3>"},
      {name: "Pollos Asados Los Nortenos", address: "4642 Rigsby Ave, San Antonio, TX 78222", html:"<img id='popupImg'src='img/pollos.png'><h3>The best northern Mexico style grilled chicken in SA!</h3>"},
      {name:"Smokey Mo's BBQ", address: "7915 W Loop 1604 N Ste 101, San Antonio, TX 78254", html:"<img id='popupImg'src='img/smokey.jpeg'><h3>Good BBQ and they also sell baked potatos</h3>"}
  ];
-
- restaurants.forEach(function(place){
-     geocode(place.address, mapboxToken).then(function(results) {
-         var Marker = new mapboxgl.Marker({color: "blue"})
-            .setLngLat(results)
-            .addTo(map);
-         var PopUp =new mapboxgl.Popup()
-            .setHTML(place.name + place.html);
-         Marker.setPopup(PopUp);
-     });
- });
-
+function restaurant() {
+    restaurants.forEach(function (place) {
+        geocode(place.address, mapboxToken).then(function (results) {
+            var marker = new mapboxgl.Marker({color: "blue"})
+                .setLngLat(results)
+                .addTo(map);
+            var PopUp = new mapboxgl.Popup()
+                .setHTML(place.name + place.html);
+            marker.setPopup(PopUp);
+        });
+    });
+}
+restaurant(restaurants);
  // $("#markersOff").click(function(e){
  //     e.preventDefault();
  //     restaurants.forEach(function(place){
  //         geocode(place.address, mapboxToken).then(function(results) {
  //             // map.flyTo({center: results, zoom: 20})
  //
- //                 Marker.remove();
+ //                 marker.remove();
  //         });
  //     });
  //
@@ -114,59 +88,60 @@
  $("#addressCenter").click(function(e){
      e.preventDefault();
      geocode($("#address").val(), mapboxToken).then(function(results) {
-         map.flyTo({center: results, zoom: 9})
-         var Marker = new mapboxgl.Marker({color: "red"})
+         map.flyTo({center: results, zoom: 15})
+         var marker = new mapboxgl.Marker({color: "red"})
              .setLngLat(results)
              .addTo(map);
          var PopUp =new mapboxgl.Popup()
              .setText($("#address").val());
-         Marker.setPopup(PopUp);
+         marker.setPopup(PopUp);
      });
  });
-//
-//  $("#zoom").change(function(){
-//     mapOptions.zoom = $("#zoom").val();
-//     if (mapOptions.zoom == 5){
-//         radius = 1/10000;
-//     }else if(mapOptions.zoom == 15){
-//         radius = 1/100000;
-//     }else if(mapOptions.zoom == 20){
-//         radius = 1/100000;
-//     }
-//     map = new mapboxgl.Map(mapOptions);
-//
-//     // requestAnimationFrame(animateMarker);
-//  });
-//
-//
-map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v11',
-    center: [-98.4861, 29.4252],
-    zoom: 8,
-    duration: 2000
-});
 
-    var animatedMarker = new mapboxgl.Marker();
+ $("#zoom").change(function(){
+    mapOptions.zoom = $("#zoom").val();
+    if (mapOptions.zoom == 5){
+        radius = 1/10;
+    }else if(mapOptions.zoom == 15){
+        radius = 1/10000;
+    }else if(mapOptions.zoom == 20){
+        radius = 1/100000;
+    }
+    map = new mapboxgl.Map(mapOptions);
+    restaurant();
 
-    function animateMarker(timestamp) {
+    // requestAnimationFrame(animatemarker);
+ });
+
+
+// map = new mapboxgl.Map({
+//     container: 'map',
+//     style: 'mapbox://styles/mapbox/streets-v11',
+//     center: [-98.4861, 29.4252],
+//     zoom: 8,
+//     duration: 2000
+// });
+
+    var animatedmarker = new mapboxgl.Marker();
+
+    function animatemarker(timestamp) {
         // mapOptions.duration = 2000;
 
 // Update the data to a new position based on the animation timestamp. The
 // divisor in the expression `timestamp / 1000` controls the animation speed.
-        animatedMarker.setLngLat([
+        animatedmarker.setLngLat([
             -98.4861,
             29.4252 + (Math.sin(timestamp / 100) * radius)
         ]);
 
 // Ensure it's added to the map. This is safe to call if it's already added.
-        animatedMarker.addTo(map);
+        animatedmarker.addTo(map);
 
 // Request the next frame of the animation.
-      globalId = requestAnimationFrame(animateMarker);
+      requestAnimationFrame(animatemarker);
     }
     // Start the animation.
-    requestAnimationFrame(animateMarker);
+    requestAnimationFrame(animatemarker);
     // //set interval to timeout and cancel animation after 2 seconds.
     // var count = 0;
     // var max = 1;
