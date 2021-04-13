@@ -47,7 +47,7 @@
     var mapOptions = {
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-98.4861, 29.4252], // San Antonio
+        center: [-98.4936, 29.4241], // San Antonio center
         zoom: 9.7,// captures all of 1604 Loop
     }
         var map = new mapboxgl.Map(mapOptions);
@@ -88,7 +88,7 @@ restaurant(restaurants);
  $("#addressCenter").click(function(e){
      e.preventDefault();
      geocode($("#address").val(), mapboxToken).then(function(results) {
-         map.flyTo({center: results, zoom: 15})
+         map.flyTo({center: results, zoom: 9})
          var marker = new mapboxgl.Marker({color: "red"})
              .setLngLat(results)
              .addTo(map);
@@ -99,16 +99,20 @@ restaurant(restaurants);
  });
 
  $("#zoom").change(function(){
-    mapOptions.zoom = $("#zoom").val();
-    if (mapOptions.zoom == 5){
+    // mapOptions.zoom = $("#zoom").val();
+    if ($("#zoom").val() == 5){
+        map.setZoom(5);
         radius = 1/10;
-    }else if(mapOptions.zoom == 15){
+    }else if($("#zoom").val() == 15){
+        map.setZoom(15);
         radius = 1/10000;
-    }else if(mapOptions.zoom == 20){
+    }else if($("#zoom").val() == 20){
+        map.setZoom(20);
         radius = 1/100000;
     }
-    map = new mapboxgl.Map(mapOptions);
-    restaurant();
+
+    // map = new mapboxgl.Map(mapOptions);
+    // restaurant();
 
     // requestAnimationFrame(animatemarker);
  });
