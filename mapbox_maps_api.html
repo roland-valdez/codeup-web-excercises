@@ -84,8 +84,10 @@ function restaurant() {
             marker.setPopup(PopUp);
         });
     });
+
 }
 restaurant(restaurants);
+
 
     // ************ REMOVE MARKERS *******************
 
@@ -114,35 +116,35 @@ restaurant(restaurants);
  });
 
 
-// map = new mapboxgl.Map({
-//     container: 'map',
-//     style: 'mapbox://styles/mapbox/streets-v11',
-//     center: [-98.4861, 29.4252],
-//     zoom: 8,
-//     duration: 2000
-// });
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [-98.4861, 29.4252],
+    zoom: 8,
+    duration: 2000
+});
 
-    var animatedmarker = new mapboxgl.Marker();
+    var marker = new mapboxgl.Marker();
 
-    function animatemarker(timestamp) {
-        // mapOptions.duration = 2000;
-        console.log();
-
+    function animateMarker(timestamp) {
+        var radius = 1/500;
+        var speed = 100;
 // Update the data to a new position based on the animation timestamp. The
 // divisor in the expression `timestamp / 1000` controls the animation speed.
-        animatedmarker.setLngLat([
+        marker.setLngLat([
             -98.4861,
-            29.4252 + (Math.sin(timestamp / 100) * radius)
+            29.4252 + Math.abs(Math.sin(timestamp / speed) * radius)
         ]);
 
 // Ensure it's added to the map. This is safe to call if it's already added.
-        animatedmarker.addTo(map);
+        marker.addTo(map);
 
 // Request the next frame of the animation.
-      requestAnimationFrame(animatemarker);
+        requestAnimationFrame(animateMarker);
     }
+
     // Start the animation.
-    requestAnimationFrame(animatemarker);
+    requestAnimationFrame(animateMarker);
     //set interval to timeout and cancel animation after 2 seconds.
     // var count = 0;
     // var max = 1;
