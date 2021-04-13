@@ -18,8 +18,8 @@
       margin: 50px;
       border: 3px solid cornflowerblue;
     }
-    img {
-      width: 200px;
+    .jumbotron{
+      background-image: url("img/pexels-brett-sayles-912364.jpg");
     }
   </style>
   <title>Accuweather Forecast</title>
@@ -27,69 +27,58 @@
 <body>
 <div class="jumbotron"> Accuweather</div>
 <form class="w-50 mx-5">
-  <!--  <div class="form-group">-->
-  <!--    <label for="zoom">Select map zoom level</label>-->
-  <!--    <select class="form-control" id="zoom">-->
-  <!--      <option value="5">5</option>-->
-  <!--      <option value="15">15</option>-->
-  <!--      <option value="20">20</option>-->
-  <!--    </select>-->
-  <!--  </div>-->
   <div class="form-group">
     <label for="location">Enter city for weather forecast:</label>
     <input type="text" class="form-control" id="location" placeholder="San Antonio, TX">
     <button id="weatherBtn" class="btn btn-secondary my-2">Show Me the Weather</button>
   </div>
-  <!--  <div class="form-group">-->
-  <!--    <button id="markersOff" class="btn btn-secondary my-2">Hide markers</button>-->
-  <!--  </div>-->
-
 </form>
 <div class="row mx-1 d-flex justify-content-around">
   <!--  //*************** WEATHER CARDS **********-->
   <div class="col-2 card mx-1" style="width: 18rem;">
-    <img class="card-img-top" src="" alt="Card image cap">
+    <img class="card-img-top" src="" alt="weather icons">
     <div class="card-body">
-      <h5 class="card-title">Date</h5>
-      <p class="card-text">html with current temp.</p>
+      <h5 class=" currentDT card-title">Date</h5>
+      <p class="current card-text">html with current temp.</p>
       <p class="low card-text">html with low of day.</p>
-      <p  class=" high card-text">html with high of the day.</p>
+      <p class="high card-text">html with high of the day.</p>
     </div>
   </div>
   <div class="col-2 card mx-1" style="width: 18rem;">
-    <img class="card-img-top" src="" alt="Card image cap">
+    <img class="card-img-top" src="" alt="weather icons">
     <div class="card-body">
-      <h5 class="card-title">Date</h5>
-      <p class="card-text">html with current temp.</p>
+      <h5 class="date card-title">Date</h5>
       <p class="low card-text">html with low of day.</p>
-      <p  class=" high card-text">html with high of the day.</p>
+      <p class="high card-text">html with high of the day.</p>
     </div>
   </div>
   <div class="col-2 card mx-1" style="width: 18rem;">
-    <img class="card-img-top" src="" alt="Card image cap">
+    <div class="day">
+    <img class="dayIcon card-img-top" src="" alt="day">
+    </div>
+    <div class="night">
+    <img class="nightIcon card-img-top" src="" alt="night">
+    </div>
     <div class="card-body">
-      <h5 class="card-title">Date</h5>
-      <p class="card-text">html with current temp.</p>
+      <h5 class="date card-title">Date</h5>
       <p class="low card-text">html with low of day.</p>
-      <p  class=" high card-text">html with high of the day.</p>
+      <p  class="high card-text">html with high of the day.</p>
     </div>
   </div>
   <div class="col-2 card mx-1" style="width: 18rem;">
-    <img class="card-img-top" src="" alt="Card image cap">
+    <img class="card-img-top" src="" alt="weather icons">
     <div class="card-body">
-      <h5 class="card-title">Date</h5>
-      <p class="card-text">html with current temp.</p>
+      <h5 class="date card-title">Date</h5>
       <p class="low card-text">html with low of day.</p>
-      <p  class=" high card-text">html with high of the day.</p>
+      <p  class="high card-text">html with high of the day.</p>
     </div>
   </div>
   <div class="col-2 card mx-1" style="width: 18rem;">
-    <img class="card-img-top" src="" alt="Card image cap">
+    <img class="card-img-top" src="" alt="weather icons">
     <div class="card-body">
-      <h5 class="card-title">Date</h5>
-      <p class="card-text">html with current temp.</p>
+      <h5 class="date card-title">Date</h5>
       <p class="low card-text">html with low of day.</p>
-      <p  class=" high card-text">html with high of the day.</p>
+      <p  class="high card-text">html with high of the day.</p>
     </div>
   </div>
 </div>
@@ -97,21 +86,6 @@
 <div class="row d-flex justify-content-center">
 <div class="column" id='map' style='width: 75vw; height: 50vh;'></div>
 </div>
-
-
-<!--<h1>Weather Map Project</h1>-->
-
-
-<!--<h5>Tips</h5>-->
-<!--<ul>-->
-<!--  <li>Take time to plan out your approach for each part of the project</li>-->
-<!--  <li>Commit along the way. Especially as you are starting new functionality</li>-->
-<!--  <li>You may utilize the geocoder helper methods from the previous mapbox lesson</li>-->
-<!--  <li>API Keys should be protected in your keys.js</li>-->
-<!--  <li>Read the docs!</li>-->
-<!--  <li>Get your project working, then focus on styling & refactoring</li>-->
-<!--  <li>To add mapbox autocomplete search, you will need to include geocoder scripts from mapbox</li>-->
-<!--</ul>-->
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -131,7 +105,7 @@
   $(document).ready(function () {
 
     var longlat = [-97.6311,26.1326]
-// ************* DISPLAY MAP ******************
+// ************* DISPLAY MAP - Default to San Antonio******************
 
     mapboxgl.accessToken = mapboxToken;
     var mapOptions = {
@@ -149,24 +123,47 @@
     $.get("https://api.openweathermap.org/data/2.5/onecall", {
       lon:longlat[0],
       lat: longlat[1],
-      exclude: "hourly,current,minutely,hourly,alerts",
+      exclude: "hourly,minutely,hourly,alerts",
       appid:open_weatherToken,
       units: "imperial"
     }).done(function (results){
-      forecast = results;
-      // console.log(forecast);
-      // ************* DISPLAY WEATHER ******************
-      // console.log(forecast.daily[0].temp);
-      forecast.daily.forEach(function(index){
-        console.log(index.temp.min);
-        console.log(index);
-        // $("#low").html("<h6>Min temp: " + forecast.daily[0].temp.min + " degF</h6>");
-        // $("#high").html("<h6>Max temp: " + forecast.daily[0].temp.max + " degF</h6>");
+      console.log(results);
+      console.log(results.daily[0].dt);
+// ************* DISPLAY WEATHER ******************
+
+      $(".day").html();
+      $(".night").html();
+
+      var dayofWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      $(".currentDT").each(function(){
+        var utcSeconds = results.current.dt;
+        var day = new Date(0); // The 0 there is the key, which sets the date to the epoch
+        day.setUTCSeconds(utcSeconds);
+        $(this).html("<h6>" + dayofWeek[day.getDay()] + "</h6><h6>"  + month[day.getMonth()] + " " + day.getDate()+ "</h6>");
+      });
+      $(".current").html("<h6>Current temp: " + Math.round(results.current.temp) + "&#8457;</h6>");
+
+      var i = 0;
+      $(".date").each(function(){
+        var utcSeconds = results.daily[i].dt;
+        var day = new Date(0); // The 0 there is the key, which sets the date to the epoch
+        day.setUTCSeconds(utcSeconds);
+        $(this).html("<h6>" + dayofWeek[day.getDay()] + "</h6><h6>"  + month[day.getMonth()] + " " + day.getDate()+ "</h6>");
+        i++;
+      });
+
+     var i = 0;
+     $(".low").each(function(){
+       $(this).html("<h6>Min temp: " + Math.round(results.daily[i].temp.min) + "&#8457;</h6>");
+       i++;
+     })
+      var i = 0;
+      $(".high").each(function(){
+        $(this).html("<h6>Max temp: " + Math.round(results.daily[i].temp.max) + "&#8457;</h6>");
+        i++;
       })
-
-
-
-    })
+    });
 
 
 
