@@ -12,7 +12,15 @@
             border: 3px solid cornflowerblue;
         }
         img {
-            width: 200px;
+            width: 150px;
+        }
+        .marker {
+            background-image: url('img/restaurant.png');
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
         }
     </style>
 
@@ -43,6 +51,8 @@
 <script src="js/keys.js"></script>
 <script src="js/mapbox-geocoder-utils.js"></script>
 <script>
+    // ************ DISPLAY MAP ON SAN ANTONIO CENTER *******************
+
     mapboxgl.accessToken = mapboxToken;
     var mapOptions = {
         container: 'map',
@@ -51,19 +61,22 @@
         zoom: 9.7,// captures all of 1604 Loop
     }
         var map = new mapboxgl.Map(mapOptions);
-
     // var radius = 1/500;
 
 
+    // ************ DISPLAY RESTAURANTS *******************
+
  var restaurants = [
-     {name:"Chama Gaúcha Brazilian Steakhouse", address:"18318 Sonterra Pl, San Antonio, TX 78258", html:"<img id='popupImg'src='img/chama.jpeg'><h3>If you love beef this is the place for you!</h3>"},
-     {name: "Pollos Asados Los Nortenos", address: "4642 Rigsby Ave, San Antonio, TX 78222", html:"<img id='popupImg'src='img/pollos.png'><h3>The best northern Mexico style grilled chicken in SA!</h3>"},
-     {name:"Smokey Mo's BBQ", address: "7915 W Loop 1604 N Ste 101, San Antonio, TX 78254", html:"<img id='popupImg'src='img/smokey.jpeg'><h3>Good BBQ and they also sell baked potatos</h3>"}
+     {name:"Chama Gaúcha Brazilian Steakhouse", address:"18318 Sonterra Pl, San Antonio, TX 78258", html:"<img id='popupImg'src='img/chama.jpeg'><h6>If you love beef this is the place for you!</h6>"},
+     {name: "Pollos Asados Los Nortenos", address: "4642 Rigsby Ave, San Antonio, TX 78222", html:"<img id='popupImg'src='img/pollos.png'><h6>The best northern Mexico style grilled chicken in SA!</h6>"},
+     {name:"Smokey Mo's BBQ", address: "7915 W Loop 1604 N Ste 101, San Antonio, TX 78254", html:"<img id='popupImg'src='img/smokey.jpeg'><h6>Good BBQ and they also sell baked potatos</h6>"}
  ];
 function restaurant() {
     restaurants.forEach(function (place) {
         geocode(place.address, mapboxToken).then(function (results) {
-            var marker = new mapboxgl.Marker({color: "blue"})
+            var el = document.createElement('div');
+            el.className = 'marker';
+            var marker = new mapboxgl.Marker(el)
                 .setLngLat(results)
                 .addTo(map);
             var PopUp = new mapboxgl.Popup()
@@ -73,18 +86,15 @@ function restaurant() {
     });
 }
 restaurant(restaurants);
- // $("#markersOff").click(function(e){
- //     e.preventDefault();
- //     restaurants.forEach(function(place){
- //         geocode(place.address, mapboxToken).then(function(results) {
- //             // map.flyTo({center: results, zoom: 20})
- //
- //                 marker.remove();
- //         });
- //     });
- //
- // });
 
+    // ************ REMOVE MARKERS *******************
+
+ $("#markersOff").click(function(e){
+     e.preventDefault();
+     var map = new mapboxgl.Map(mapOptions);
+ });
+
+ // ************ ADDRESS CENTER *******************
  $("#addressCenter").click(function(e){
      e.preventDefault();
      geocode($("#address").val(), mapboxToken).then(function(results) {
@@ -97,24 +107,10 @@ restaurant(restaurants);
          marker.setPopup(PopUp);
      });
  });
+ // ************ ZOOM DROP DOWN *******************
 
  $("#zoom").change(function(){
-    // mapOptions.zoom = $("#zoom").val();
-    if ($("#zoom").val() == 5){
-        map.setZoom(5);
-        radius = 1/10;
-    }else if($("#zoom").val() == 15){
-        map.setZoom(15);
-        radius = 1/10000;
-    }else if($("#zoom").val() == 20){
-        map.setZoom(20);
-        radius = 1/100000;
-    }
-
-    // map = new mapboxgl.Map(mapOptions);
-    // restaurant();
-
-    // requestAnimationFrame(animatemarker);
+    map.setZoom($("#zoom").val());
  });
 
 
@@ -130,6 +126,7 @@ restaurant(restaurants);
 
     function animatemarker(timestamp) {
         // mapOptions.duration = 2000;
+        console.log();
 
 // Update the data to a new position based on the animation timestamp. The
 // divisor in the expression `timestamp / 1000` controls the animation speed.
@@ -146,7 +143,7 @@ restaurant(restaurants);
     }
     // Start the animation.
     requestAnimationFrame(animatemarker);
-    // //set interval to timeout and cancel animation after 2 seconds.
+    //set interval to timeout and cancel animation after 2 seconds.
     // var count = 0;
     // var max = 1;
     // var interval = 1000; // interval time in milliseconds
