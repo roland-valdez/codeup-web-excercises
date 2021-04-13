@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Roland's Favorite Restuarants</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        #map {
+            margin: 50px;
+            border: 3px solid cornflowerblue;
+        }
+        img {
+            width: 200px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id='map' style='width: 600px; height: 600px;'></div>
+<form class="w-50 mx-5">
+    <div class="form-group">
+        <label for="zoom">Select map zoom level</label>
+        <select class="form-control" id="zoom">
+            <option value="5">5</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="address">Center map on this location:</label>
+        <input type="text" class="form-control" id="address" placeholder="123 Main Street, San Antonio, TX">
+        <button id="addressCenter" class="btn btn-secondary my-2">Center</button>
+    </div>
+    <div class="form-group">
+        <button id="markersOff" class="btn btn-secondary my-2">Hide markers</button>
+    </div>
+
+</form>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="js/keys.js"></script>
+<script src="js/mapbox-geocoder-utils.js"></script>
+<script>
+    mapboxgl.accessToken = mapboxToken;
+    var mapOptions = {
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-98.4861, 29.4252], // San Antonio
+        zoom: 9.7,// captures all of 1604 Loop
+    }
+        var map = new mapboxgl.Map(mapOptions);
+
+    // var radius = 1/500;
+
+
+ var restaurants = [
+     {name:"Chama Gaúcha Brazilian Steakhouse", address:"18318 Sonterra Pl, San Antonio, TX 78258", html:"<img id='popupImg'src='img/chama.jpeg'><h3>If you love beef this is the place for you!</h3>"},
+     {name: "Pollos Asados Los Nortenos", address: "4642 Rigsby Ave, San Antonio, TX 78222", html:"<img id='popupImg'src='img/pollos.png'><h3>The best northern Mexico style grilled chicken in SA!</h3>"},
+     {name:"Smokey Mo's BBQ", address: "7915 W Loop 1604 N Ste 101, San Antonio, TX 78254", html:"<img id='popupImg'src='img/smokey.jpeg'><h3>Good BBQ and they also sell baked potatos</h3>"}
+ ];
+function restaurant() {
+    restaurants.forEach(function (place) {
+        geocode(place.address, mapboxToken).then(function (results) {
+            var marker = new mapboxgl.Marker({color: "blue"})
+                .setLngLat(results)
+                .addTo(map);
+            var PopUp = new mapboxgl.Popup()
+                .setHTML(place.name + place.html);
+            marker.setPopup(PopUp);
+        });
+    });
+}
+restaurant(restaurants);
+ // $("#markersOff").click(function(e){
+ //     e.preventDefault();
+ //     restaurants.forEach(function(place){
+ //         geocode(place.address, mapboxToken).then(function(results) {
+ //             // map.flyTo({center: results, zoom: 20})
+ //
+ //                 marker.remove();
+ //         });
+ //     });
+ //
+ // });
+
+ $("#addressCenter").click(function(e){
+     e.preventDefault();
+     geocode($("#address").val(), mapboxToken).then(function(results) {
+         map.flyTo({center: results, zoom: 15})
+         var marker = new mapboxgl.Marker({color: "red"})
+             .setLngLat(results)
+             .addTo(map);
+         var PopUp =new mapboxgl.Popup()
+             .setText($("#address").val());
+         marker.setPopup(PopUp);
+     });
+ });
+
+ $("#zoom").change(function(){
+    mapOptions.zoom = $("#zoom").val();
+    if (mapOptions.zoom == 5){
+        radius = 1/10;
+    }else if(mapOptions.zoom == 15){
+        radius = 1/10000;
+    }else if(mapOptions.zoom == 20){
+        radius = 1/100000;
+    }
+    map = new mapboxgl.Map(mapOptions);
+    restaurant();
+
+    // requestAnimationFrame(animatemarker);
+ });
+
+
+// map = new mapboxgl.Map({
+//     container: 'map',
+//     style: 'mapbox://styles/mapbox/streets-v11',
+//     center: [-98.4861, 29.4252],
+//     zoom: 8,
+//     duration: 2000
+// });
+
+    var animatedmarker = new mapboxgl.Marker();
+
+    function animatemarker(timestamp) {
+        // mapOptions.duration = 2000;
+
+// Update the data to a new position based on the animation timestamp. The
+// divisor in the expression `timestamp / 1000` controls the animation speed.
+        animatedmarker.setLngLat([
+            -98.4861,
+            29.4252 + (Math.sin(timestamp / 100) * radius)
+        ]);
+
+// Ensure it's added to the map. This is safe to call if it's already added.
+        animatedmarker.addTo(map);
+
+// Request the next frame of the animation.
+      requestAnimationFrame(animatemarker);
+    }
+    // Start the animation.
+    requestAnimationFrame(animatemarker);
+    // //set interval to timeout and cancel animation after 2 seconds.
+    // var count = 0;
+    // var max = 1;
+    // var interval = 1000; // interval time in milliseconds
+    // var intervalId = setInterval(function () {
+    //     if (count >= max) {
+    //         clearInterval(intervalId);
+    //         console.log('All done');
+    //         cancelAnimationFrame(globalId);
+    //     } else {
+    //         count++;
+    //     }
+    // }, interval);
+
+</script>
+
+</body>
+</html>
