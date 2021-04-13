@@ -1,103 +1,152 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-  <!-- mapbox CSS and JS -->
-  <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
-  <link href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
-  <!-- Custom CSS -->
-  <style>
-    #map {
-      margin: 50px;
-      border: 3px solid cornflowerblue;
-    }
-    .jumbotron{
-      background-image: url("img/pexels-brett-sayles-912364.jpg");
-      font-size: 2rem;
-      color: #a2034e;
-    }
-    .weatherIcon{
-      width: 75px;
-      height: 75px;
-      border: 1px solid cornflowerblue;
-    }
-  </style>
-  <title>Accuweather Forecast</title>
+    <!-- mapbox CSS and JS -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet'/>
+    <!-- Custom CSS -->
+    <style>
+        #map {
+            margin: 50px;
+            border: 3px solid cornflowerblue;
+        }
+
+        .jumbotron {
+            background-image: url("img/jumbotron_resize.png");
+            background-size: cover;
+            font-size: 2rem;
+            color: #F1970E;
+            text-shadow: 0.5px 0px 1px rgba(0, 0, 0, .5);
+        }
+
+        main {
+            background-size: cover;
+            background-image: url("img/sunny.jpg");
+            color: #F1970E;
+
+            text-shadow: 0.5px 0px 1px rgba(0, 0, 0, .5);
+        }
+
+        snow {
+            background-image: url("img/snow.jpg");
+        }
+
+        .weatherIcon {
+            width: 75px;
+            height: 75px;
+            border: 1px solid cornflowerblue;
+            margin-top: 10px;
+            background-color: white;
+
+
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.75);
+            /*opacity: 70%;*/
+        }
+    </style>
+    <title>Accuweather Forecast</title>
 </head>
 <body>
-<div class="jumbotron text-center"> Accuweather</div>
-<form class="w-50 mx-5">
-  <div class="form-group">
-    <label for="weatherLocation">Enter city for weather forecast:</label>
-    <input type="text" class="form-control" id="weatherLocation" placeholder="San Antonio, TX">
-    <button id="weatherBtn" class="btn btn-secondary my-2">Show Me the Weather</button>
-  </div>
-</form>
-<div class="city"></div>
-<div class="row mx-1 d-flex justify-content-around">
-  <!--  //*************** WEATHER CARDS **********-->
-  <div class="col-2 card mx-1" style="width: 18rem;">
-    <div class="iconCurrent">
-      <img class="card-img-top" src="" alt="weather">
-    </div>    <div class="card-body">
-      <h5 class=" currentDT card-title">Date</h5>
-      <p class="current card-text">html with current temp.</p>
-      <p class="low card-text">html with low of day.</p>
-      <p class="high card-text">html with high of the day.</p>
+<div class="jumbotron jumbotron-fluid text-center m-0"> Accuweather</div>
+<main>
+    <div class="row d-flex justify-content-start py-3">
+        <div class="col-6 px-0 w-100 d-flex justify-content-start align-items-end">
+            <form class="w-100 mx-5">
+                <div class="form-group">
+                    <label for="weatherLocation">Enter city for weather forecast:</label>
+                    <input type="text" class="form-control" id="weatherLocation" placeholder="San Antonio, TX">
+                </div>
+            </form>
+        </div>
+        <div class="col-6 m-0 p-0 d-flex justify-content-start align-items-end">
+            <button id="weatherBtn" class="btn btn-secondary my-2">Show Me the Weather</button>
+        </div>
     </div>
-  </div>
-  <div class="col-2 card mx-1" style="width: 18rem;">
-    <div class="icons d-flex justify-content-center">
 
-    </div>
-    <div class="card-body">
-      <h5 class="date card-title">Date</h5>
-      <p class="low card-text">html with low of day.</p>
-      <p class="high card-text">html with high of the day.</p>
-    </div>
-  </div>
-  <div class="col-2 card mx-1" style="width: 18rem;">
-    <div class="icons d-flex justify-content-center">
 
-    </div>
-    <div class="card-body">
-      <h5 class="date card-title">Date</h5>
-      <p class="low card-text">html with low of day.</p>
-      <p  class="high card-text">html with high of the day.</p>
-    </div>
-  </div>
-  <div class="col-2 card mx-1" style="width: 18rem;">
-    <div class="icons d-flex justify-content-center">
+        <div class="row mx-1 d-flex justify-content-around">
+            <!--  //*************** WEATHER CARDS **********-->
+            <div class="col-2 card mx-1" style="width: 18rem;">
+                <div class="icons d-flex justify-content-center">
 
-    </div>
-    <div class="card-body">
-      <h5 class="date card-title">Date</h5>
-      <p class="low card-text">html with low of day.</p>
-      <p  class="high card-text">html with high of the day.</p>
-    </div>
-  </div>
-  <div class="col-2 card mx-1" style="width: 18rem;">
-    <div class="icons d-flex justify-content-center">
+                </div>
+                <div class="card-body">
+                    <h5 class="date card-title">Date</h5>
+                    <p class="low card-text">html with low of day.</p>
+                    <p class="high card-text">html with high of the day.</p>
+                </div>
+            </div>
+            <div class="col-2 card mx-1" style="width: 18rem;">
+                <div class="icons d-flex justify-content-center">
 
+                </div>
+                <div class="card-body">
+                    <h5 class="date card-title">Date</h5>
+                    <p class="low card-text">html with low of day.</p>
+                    <p class="high card-text">html with high of the day.</p>
+                </div>
+            </div>
+            <div class="col-2 card mx-1" style="width: 18rem;">
+                <div class="icons d-flex justify-content-center">
+
+                </div>
+                <div class="card-body">
+                    <h5 class="date card-title">Date</h5>
+                    <p class="low card-text">html with low of day.</p>
+                    <p class="high card-text">html with high of the day.</p>
+                </div>
+            </div>
+            <div class="col-2 card mx-1" style="width: 18rem;">
+                <div class="icons d-flex justify-content-center">
+
+                </div>
+                <div class="card-body">
+                    <h5 class="date card-title">Date</h5>
+                    <p class="low card-text">html with low of day.</p>
+                    <p class="high card-text">html with high of the day.</p>
+                </div>
+            </div>
+            <div class="col-2 card mx-1" style="width: 18rem;">
+                <div class="icons d-flex justify-content-center">
+
+                </div>
+                <div class="card-body">
+                    <h5 class="date card-title">Date</h5>
+                    <p class="low card-text">html with low of day.</p>
+                    <p class="high card-text">html with high of the day.</p>
+                </div>
+            </div>
+        </div>
+        <!--  *************** current city and temp display *****************-->
+    <div class="row mx-5 mt-5">
+        <div class="col-12 d-flex justify-content-center" style="width: 18rem;">
+            <div class="">
+                <div class="city"><h6>San Antonio, TX</h6></div>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-      <h5 class="date card-title">Date</h5>
-      <p class="low card-text">html with low of day.</p>
-      <p  class="high card-text">html with high of the day.</p>
-    </div>
-  </div>
-</div>
-<!--  *************** MAP *****************-->
-<div class="row d-flex justify-content-center">
-<div class="column" id='map' style='width: 75vw; height: 50vh;'></div>
-</div>
+        <div class="row mx-5 mt-5">
+            <div class="col-12 d-flex justify-content-center" style="width: 18rem;">
+                <div class="">
+                    <div class="current"></div>
+                </div>
+            </div>
+        </div>
+        <!--  *************** MAP *****************-->
+        <div class="row d-flex justify-content-center">
+            <div class="column" id='map' style='width: 75vw; height: 50vh;'></div>
+        </div>
+</main>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -113,92 +162,134 @@
 <script src="js/mapbox-geocoder-utils.js"></script>
 
 <script>
-  "use strict";
-  $(document).ready(function () {
+    "use strict";
+$(document).ready(function () {
 
-    // ************* DISPLAY MAP ON LOAD - Default to San Antonio ******************
-    var longlat = [-97.6311,26.1326];
+// ************* DISPLAY MAP ON LOAD - Default to San Antonio ******************
+    var longlat = [-98.4936, 29.4241];//SA coordinates
     mapboxgl.accessToken = mapboxToken;
     var mapOptions = {
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: longlat, // San Antonio
-      zoom: 9.7,// captures all of 1604 Loop
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: longlat, // San Antonio
+        zoom: 9.7,// captures all of 1604 Loop
     }
     var map = new mapboxgl.Map(mapOptions);
+    var marker = new mapboxgl.Marker({color: "red", draggable: true})
+        .setLngLat(longlat)
+        .addTo(map);
+    var PopUp = new mapboxgl.Popup()
+        .setText($("#weatherLocation").val());
+    marker.setPopup(PopUp);
     getWeather();
-// ************* GET FORECAST LOCATION ******************
-//   var latlong = [-97.6311,26.1326]
-    $("#weatherBtn").click(function(e){
-      e.preventDefault();
-      // marker.remove();
-      console.log("you clicked");
-      geocode($("#weatherLocation").val(), mapboxToken).then(function(results) {
-        console.log(results);
-        longlat = results;
-        map.flyTo({center: results, zoom: 9.7})
-        var marker = new mapboxgl.Marker({color: "red"})
-          .setLngLat(results)
-          .addTo(map);
-        var PopUp =new mapboxgl.Popup()
-          .setText($("#weatherLocation").val());
-        marker.setPopup(PopUp);
-        getWeather();
-      });
-    });
-// ************* GET WEATHER ******************
-    function getWeather() {
-      $.get("https://api.openweathermap.org/data/2.5/onecall", {
-        lon: longlat[0],
-        lat: longlat[1],
-        exclude: "hourly,minutely,hourly,alerts",
-        appid: open_weatherToken,
-        units: "imperial"
-      }).done(function (results) {
-        console.log(results);
-        console.log(results.daily[0].dt);
-        console.log(results.daily[0].weather[0].icon);
 
+// ************* GET LOCATION FROM SEARCH ******************
+// ************* converts address to lat long ******************
+//   var latlong = [-97.6311,26.1326]
+    $("#weatherBtn").click(function (e) {
+        e.preventDefault();
+        var map = new mapboxgl.Map(mapOptions);
+        geocode($("#weatherLocation").val(), mapboxToken).then(function (results) {
+            console.log("location:", results);
+            mapOptions.center = results;
+            longlat = results;
+            map.flyTo({center: results, zoom: 9.7, duration: 5000})
+            var marker = new mapboxgl.Marker({color: "red", draggable: true})
+                .setLngLat(results)
+                .addTo(map);
+            var PopUp = new mapboxgl.Popup()
+                .setText($("#weatherLocation").val());
+            marker.setPopup(PopUp);
+            getWeather();
+        });
+    });
+// ************* GET LOCATION FROM MOUSE CLICK ******************
+
+// ************* GET LOCATION FROM MARKER DRAG ******************
+    function onDragEnd() {
+        var longlat = marker.getLngLat();
+        longlat = [longlat.lng, longlat.lat];
+        console.log(longlat);
+        getWeather();
+        // reverseGeocode(longlat, mapboxToken).then(function (results) {
+        //     // console.log("location:", results);
+        //     // mapOptions.center = results;
+        //     longlat = results;
+        //     // map.flyTo({center: results, zoom: 9.7, duration: 5000})
+        //     // var marker = new mapboxgl.Marker({color: "red", draggable: true})
+        //     //     .setLngLat(results)
+        //     //     .addTo(map);
+        //     // var PopUp = new mapboxgl.Popup()
+        //     //     .setText($("#weatherLocation").val());
+        //     // marker.setPopup(PopUp);
+        //     getWeather();
+        // });
+    }
+
+    marker.on('dragend', onDragEnd);
+
+
+// ************* GET WEATHER ******************
+// ************* needs longlat to work ******************
+
+    function getWeather() {
+        $.get("https://api.openweathermap.org/data/2.5/onecall", {
+            lon: longlat[0],
+            lat: longlat[1],
+            exclude: "hourly,minutely,hourly,alerts",
+            appid: open_weatherToken,
+            units: "imperial"
+        }).done(function (results) {
+            // console.log(results);
+            // console.log(results.daily[0].dt);
+            // console.log(results.daily[0].weather[0].icon);
+            displayWeather(results);
+        });
+    }
 // ************* DISPLAY WEATHER ******************
+
+    function displayWeather(results) {
+        if ($("#weatherLocation").val() != "") {
+            $(".city").html("<h6>" + $("#weatherLocation").val() + "</h6>")
+        }
         var i = 0;
         $(".icons").each(function () {
-          $(this).html("<img class='weatherIcon card-img-top' src='http://openweathermap.org/img/wn/" + results.daily[i].weather[0].icon + ".png' alt='day'>");
-          i++;
+            $(this).html("<img class='weatherIcon card-img-top' src='http://openweathermap.org/img/wn/" + results.daily[i].weather[0].icon + ".png' alt='day'>");
+            i++;
         });
 
         var dayofWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        $(".currentDT").each(function () {
-          var utcSeconds = results.current.dt;
-          var day = new Date(0); // The 0 there is the key, which sets the date to the epoch
-          day.setUTCSeconds(utcSeconds);
-          $(this).html("<h6>" + dayofWeek[day.getDay()] + "</h6><h6>" + month[day.getMonth()] + " " + day.getDate() + "</h6>");
+        $(".current").each(function () {
+            var utcSeconds = results.current.dt;
+            var day = new Date(0); // The 0 there is the key, which sets the date to the epoch
+            day.setUTCSeconds(utcSeconds);
+            $(this).html("<h6>" + dayofWeek[day.getDay()] + "</h6><h6>" + month[day.getMonth()] + " " + day.getDate() + "</h6>");
         });
         $(".current").html("<h6>Current temp: " + Math.round(results.current.temp) + "&#8457;</h6>");
 
         var i = 0;
         $(".date").each(function () {
-          var utcSeconds = results.daily[i].dt;
-          var day = new Date(0); // The 0 there is the key, which sets the date to the epoch
-          day.setUTCSeconds(utcSeconds);
-          $(this).html("<h6>" + dayofWeek[day.getDay()] + "</h6><h6>" + month[day.getMonth()] + " " + day.getDate() + "</h6>");
-          i++;
+            var utcSeconds = results.daily[i].dt;
+            var day = new Date(0); // The 0 there is the key, which sets the date to the epoch
+            day.setUTCSeconds(utcSeconds);
+            $(this).html("<h6>" + dayofWeek[day.getDay()] + "</h6><h6>" + month[day.getMonth()] + " " + day.getDate() + "</h6>");
+            i++;
         });
 
         var i = 0;
         $(".low").each(function () {
-          $(this).html("<h6>Min temp: " + Math.round(results.daily[i].temp.min) + "&#8457;</h6>");
-          i++;
+            $(this).html("<h6>Min temp: " + Math.round(results.daily[i].temp.min) + "&#8457;</h6>");
+            i++;
         })
         var i = 0;
         $(".high").each(function () {
-          $(this).html("<h6>Max temp: " + Math.round(results.daily[i].temp.max) + "&#8457;</h6>");
-          i++;
-        })
-      });
+            $(this).html("<h6>Max temp: " + Math.round(results.daily[i].temp.max) + "&#8457;</h6>");
+            i++;
+        });
     }
-  });
 
+});
 </script>
 </body>
 </html>
