@@ -20,24 +20,33 @@
     }
     .jumbotron{
       background-image: url("img/pexels-brett-sayles-912364.jpg");
+      font-size: 2rem;
+      color: #a2034e;
+    }
+    .weatherIcon{
+      width: 75px;
+      height: 75px;
+      border: 1px solid cornflowerblue;
     }
   </style>
   <title>Accuweather Forecast</title>
 </head>
 <body>
-<div class="jumbotron"> Accuweather</div>
+<div class="jumbotron text-center"> Accuweather</div>
 <form class="w-50 mx-5">
   <div class="form-group">
-    <label for="location">Enter city for weather forecast:</label>
-    <input type="text" class="form-control" id="location" placeholder="San Antonio, TX">
+    <label for="weatherLocation">Enter city for weather forecast:</label>
+    <input type="text" class="form-control" id="weatherLocation" placeholder="San Antonio, TX">
     <button id="weatherBtn" class="btn btn-secondary my-2">Show Me the Weather</button>
   </div>
 </form>
+<div class="city"></div>
 <div class="row mx-1 d-flex justify-content-around">
   <!--  //*************** WEATHER CARDS **********-->
   <div class="col-2 card mx-1" style="width: 18rem;">
-    <img class="card-img-top" src="" alt="weather icons">
-    <div class="card-body">
+    <div class="iconCurrent">
+      <img class="card-img-top" src="" alt="weather">
+    </div>    <div class="card-body">
       <h5 class=" currentDT card-title">Date</h5>
       <p class="current card-text">html with current temp.</p>
       <p class="low card-text">html with low of day.</p>
@@ -45,7 +54,9 @@
     </div>
   </div>
   <div class="col-2 card mx-1" style="width: 18rem;">
-    <img class="card-img-top" src="" alt="weather icons">
+    <div class="icons d-flex justify-content-center">
+
+    </div>
     <div class="card-body">
       <h5 class="date card-title">Date</h5>
       <p class="low card-text">html with low of day.</p>
@@ -53,11 +64,8 @@
     </div>
   </div>
   <div class="col-2 card mx-1" style="width: 18rem;">
-    <div class="day">
-    <img class="dayIcon card-img-top" src="" alt="day">
-    </div>
-    <div class="night">
-    <img class="nightIcon card-img-top" src="" alt="night">
+    <div class="icons d-flex justify-content-center">
+
     </div>
     <div class="card-body">
       <h5 class="date card-title">Date</h5>
@@ -66,7 +74,9 @@
     </div>
   </div>
   <div class="col-2 card mx-1" style="width: 18rem;">
-    <img class="card-img-top" src="" alt="weather icons">
+    <div class="icons d-flex justify-content-center">
+
+    </div>
     <div class="card-body">
       <h5 class="date card-title">Date</h5>
       <p class="low card-text">html with low of day.</p>
@@ -74,7 +84,9 @@
     </div>
   </div>
   <div class="col-2 card mx-1" style="width: 18rem;">
-    <img class="card-img-top" src="" alt="weather icons">
+    <div class="icons d-flex justify-content-center">
+
+    </div>
     <div class="card-body">
       <h5 class="date card-title">Date</h5>
       <p class="low card-text">html with low of day.</p>
@@ -104,9 +116,8 @@
   "use strict";
   $(document).ready(function () {
 
-    var longlat = [-97.6311,26.1326]
-// ************* DISPLAY MAP - Default to San Antonio******************
-
+    // ************* DISPLAY MAP ON LOAD - Default to San Antonio ******************
+    var longlat = [-97.6311,26.1326];
     mapboxgl.accessToken = mapboxToken;
     var mapOptions = {
       container: 'map',
@@ -115,58 +126,77 @@
       zoom: 9.7,// captures all of 1604 Loop
     }
     var map = new mapboxgl.Map(mapOptions);
+    getWeather();
 // ************* GET FORECAST LOCATION ******************
 //   var latlong = [-97.6311,26.1326]
-
-// ************* GET WEATHER ******************
-    var forecast = [];
-    $.get("https://api.openweathermap.org/data/2.5/onecall", {
-      lon:longlat[0],
-      lat: longlat[1],
-      exclude: "hourly,minutely,hourly,alerts",
-      appid:open_weatherToken,
-      units: "imperial"
-    }).done(function (results){
-      console.log(results);
-      console.log(results.daily[0].dt);
-// ************* DISPLAY WEATHER ******************
-
-      $(".day").html();
-      $(".night").html();
-
-      var dayofWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-      var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-      $(".currentDT").each(function(){
-        var utcSeconds = results.current.dt;
-        var day = new Date(0); // The 0 there is the key, which sets the date to the epoch
-        day.setUTCSeconds(utcSeconds);
-        $(this).html("<h6>" + dayofWeek[day.getDay()] + "</h6><h6>"  + month[day.getMonth()] + " " + day.getDate()+ "</h6>");
+    $("#weatherBtn").click(function(e){
+      e.preventDefault();
+      // marker.remove();
+      console.log("you clicked");
+      geocode($("#weatherLocation").val(), mapboxToken).then(function(results) {
+        console.log(results);
+        longlat = results;
+        map.flyTo({center: results, zoom: 9.7})
+        var marker = new mapboxgl.Marker({color: "red"})
+          .setLngLat(results)
+          .addTo(map);
+        var PopUp =new mapboxgl.Popup()
+          .setText($("#weatherLocation").val());
+        marker.setPopup(PopUp);
+        getWeather();
       });
-      $(".current").html("<h6>Current temp: " + Math.round(results.current.temp) + "&#8457;</h6>");
-
-      var i = 0;
-      $(".date").each(function(){
-        var utcSeconds = results.daily[i].dt;
-        var day = new Date(0); // The 0 there is the key, which sets the date to the epoch
-        day.setUTCSeconds(utcSeconds);
-        $(this).html("<h6>" + dayofWeek[day.getDay()] + "</h6><h6>"  + month[day.getMonth()] + " " + day.getDate()+ "</h6>");
-        i++;
-      });
-
-     var i = 0;
-     $(".low").each(function(){
-       $(this).html("<h6>Min temp: " + Math.round(results.daily[i].temp.min) + "&#8457;</h6>");
-       i++;
-     })
-      var i = 0;
-      $(".high").each(function(){
-        $(this).html("<h6>Max temp: " + Math.round(results.daily[i].temp.max) + "&#8457;</h6>");
-        i++;
-      })
     });
+// ************* GET WEATHER ******************
+    function getWeather() {
+      $.get("https://api.openweathermap.org/data/2.5/onecall", {
+        lon: longlat[0],
+        lat: longlat[1],
+        exclude: "hourly,minutely,hourly,alerts",
+        appid: open_weatherToken,
+        units: "imperial"
+      }).done(function (results) {
+        console.log(results);
+        console.log(results.daily[0].dt);
+        console.log(results.daily[0].weather[0].icon);
 
+// ************* DISPLAY WEATHER ******************
+        var i = 0;
+        $(".icons").each(function () {
+          $(this).html("<img class='weatherIcon card-img-top' src='http://openweathermap.org/img/wn/" + results.daily[i].weather[0].icon + ".png' alt='day'>");
+          i++;
+        });
 
+        var dayofWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        $(".currentDT").each(function () {
+          var utcSeconds = results.current.dt;
+          var day = new Date(0); // The 0 there is the key, which sets the date to the epoch
+          day.setUTCSeconds(utcSeconds);
+          $(this).html("<h6>" + dayofWeek[day.getDay()] + "</h6><h6>" + month[day.getMonth()] + " " + day.getDate() + "</h6>");
+        });
+        $(".current").html("<h6>Current temp: " + Math.round(results.current.temp) + "&#8457;</h6>");
 
+        var i = 0;
+        $(".date").each(function () {
+          var utcSeconds = results.daily[i].dt;
+          var day = new Date(0); // The 0 there is the key, which sets the date to the epoch
+          day.setUTCSeconds(utcSeconds);
+          $(this).html("<h6>" + dayofWeek[day.getDay()] + "</h6><h6>" + month[day.getMonth()] + " " + day.getDate() + "</h6>");
+          i++;
+        });
+
+        var i = 0;
+        $(".low").each(function () {
+          $(this).html("<h6>Min temp: " + Math.round(results.daily[i].temp.min) + "&#8457;</h6>");
+          i++;
+        })
+        var i = 0;
+        $(".high").each(function () {
+          $(this).html("<h6>Max temp: " + Math.round(results.daily[i].temp.max) + "&#8457;</h6>");
+          i++;
+        })
+      });
+    }
   });
 
 </script>
