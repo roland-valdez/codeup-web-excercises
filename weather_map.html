@@ -22,16 +22,17 @@
         .jumbotron {
             background-image: url("img/jumbotron_resize.png");
             background-size: cover;
+            position: relative;
             font-size: 2rem;
             color: #F1970E;
             text-shadow: 0.5px 0px 1px rgba(0, 0, 0, .5);
+            z-index: 5000;
         }
 
         main {
             background-size: cover;
             background-image: url("img/sunny.jpg");
-            color: #F1970E;
-
+            color: #f10e4e;
             text-shadow: 0.5px 0px 1px rgba(0, 0, 0, .5);
         }
 
@@ -45,20 +46,31 @@
             border: 1px solid cornflowerblue;
             margin-top: 10px;
             background-color: white;
-
-
         }
 
         .card {
             background: rgba(255, 255, 255, 0.75);
             /*opacity: 70%;*/
         }
+
+        .video {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            width: 100vw;
+            object-fit: cover;
+        }
+
     </style>
     <title>Accuweather Forecast</title>
 </head>
 <body>
 <div class="jumbotron jumbotron-fluid text-center m-0"> Accuweather</div>
+
 <main>
+    <video autoplay muted loop class="video">
+        <source src="video/clear.mp4">
+    </video>
     <div class="row d-flex justify-content-start py-3">
         <div class="col-6 px-0 w-100 d-flex justify-content-start align-items-end">
             <form class="w-100 mx-5">
@@ -77,11 +89,10 @@
         <div class="row mx-1 d-flex justify-content-around">
             <!--  //*************** WEATHER CARDS **********-->
             <div class="col-2 card mx-1" style="width: 18rem;">
-                <div class="icons d-flex justify-content-center">
 
-                </div>
                 <div class="card-body">
                     <h5 class="date card-title">Date</h5>
+                    <div class="icons d-flex justify-content-center"></div>
                     <p class="low card-text">html with low of day.</p>
                     <p class="high card-text">html with high of the day.</p>
                 </div>
@@ -131,7 +142,7 @@
     <div class="row mx-5 mt-5">
         <div class="col-12 d-flex justify-content-center" style="width: 18rem;">
             <div class="">
-                <div class="city"><h6>San Antonio, TX</h6></div>
+                <div class="city"></div>
             </div>
         </div>
     </div>
@@ -165,108 +176,116 @@
     "use strict";
 $(document).ready(function () {
 
+// ************* ARRAY FOR BACKGROUND ******************
+var pictures = {
+    snow:"url('img/snow.jpg')",
+    rain:"url('img/rain.jpg')",
+    fog:"url('img/fog.jpg')",
+    clear:"url('img/clear.jpg')",
+    cloudy:"url('img/cloudy.jpg')"
+};
+
 // ************* DISPLAY MAP ON LOAD - Default to San Antonio ******************
-    var longlat = [-98.4936, 29.4241];//SA coordinates
+    var coord = [-98.4936, 29.4241];//SA coordinates in Mapbox format
     mapboxgl.accessToken = mapboxToken;
     var mapOptions = {
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: longlat, // San Antonio
+        center: coord, // San Antonio
         zoom: 9.7,// captures all of 1604 Loop
     }
     var map = new mapboxgl.Map(mapOptions);
     var marker = new mapboxgl.Marker({color: "red", draggable: true})
-        .setLngLat(longlat)
+        .setLngLat(coord)
         .addTo(map);
     var PopUp = new mapboxgl.Popup()
-        .setText($("#weatherLocation").val());
+        // .setText($("#weatherLocation").val());
     marker.setPopup(PopUp);
+    var geoCoord = {lat: coord[1], lng: coord[0]};
     getWeather();
+    marker.on('dragend', onDragEnd);
 
-// ************* GET LOCATION FROM SEARCH ******************
-// ************* converts address to lat long ******************
-//   var latlong = [-97.6311,26.1326]
+// ************* GET CITY FROM LAT LONG ******************
+function findCity(){
+    reverseGeocode(geoCoord, mapboxToken).then(function(results) {
+        var city = results.features[3].place_name;
+        var state = 'results.features[0].context[4].text';
+        $(".city").html("<h6>" + city +", " + state + "</h6>")
+    })
+}
+
+// // ************* GET LOCATION FROM SEARCH ******************
+// // ************* converts address to lat long ******************
+
     $("#weatherBtn").click(function (e) {
         e.preventDefault();
         var map = new mapboxgl.Map(mapOptions);
         geocode($("#weatherLocation").val(), mapboxToken).then(function (results) {
-            console.log("location:", results);
             mapOptions.center = results;
-            longlat = results;
+            coord = results;
+            geoCoord = {lat: coord[1], lng: coord[0]};
             map.flyTo({center: results, zoom: 9.7, duration: 5000})
             var marker = new mapboxgl.Marker({color: "red", draggable: true})
                 .setLngLat(results)
                 .addTo(map);
             var PopUp = new mapboxgl.Popup()
-                .setText($("#weatherLocation").val());
+                // .setText($("#weatherLocation").val());
             marker.setPopup(PopUp);
             getWeather();
+            marker.on('dragend', onDragEnd);
+
         });
     });
-// ************* GET LOCATION FROM MOUSE CLICK ******************
 
 // ************* GET LOCATION FROM MARKER DRAG ******************
     function onDragEnd() {
-        var longlat = marker.getLngLat();
-        longlat = [longlat.lng, longlat.lat];
-        console.log(longlat);
+        coord = marker.getLngLat();
+        coord = [coord.lng, coord.lat];
+        geoCoord = marker.getLngLat();
         getWeather();
-        // reverseGeocode(longlat, mapboxToken).then(function (results) {
-        //     // console.log("location:", results);
-        //     // mapOptions.center = results;
-        //     longlat = results;
-        //     // map.flyTo({center: results, zoom: 9.7, duration: 5000})
-        //     // var marker = new mapboxgl.Marker({color: "red", draggable: true})
-        //     //     .setLngLat(results)
-        //     //     .addTo(map);
-        //     // var PopUp = new mapboxgl.Popup()
-        //     //     .setText($("#weatherLocation").val());
-        //     // marker.setPopup(PopUp);
-        //     getWeather();
-        // });
+        marker.on('dragend', onDragEnd);
     }
-
-    marker.on('dragend', onDragEnd);
-
-
 // ************* GET WEATHER ******************
-// ************* needs longlat to work ******************
+// ************* needs coord to work ******************
 
     function getWeather() {
         $.get("https://api.openweathermap.org/data/2.5/onecall", {
-            lon: longlat[0],
-            lat: longlat[1],
+            lon: coord[0],
+            lat: coord[1],
             exclude: "hourly,minutely,hourly,alerts",
             appid: open_weatherToken,
             units: "imperial"
         }).done(function (results) {
-            // console.log(results);
-            // console.log(results.daily[0].dt);
-            // console.log(results.daily[0].weather[0].icon);
+           findCity();
             displayWeather(results);
         });
     }
 // ************* DISPLAY WEATHER ******************
 
     function displayWeather(results) {
-        if ($("#weatherLocation").val() != "") {
-            $(".city").html("<h6>" + $("#weatherLocation").val() + "</h6>")
-        }
-        var i = 0;
-        $(".icons").each(function () {
-            $(this).html("<img class='weatherIcon card-img-top' src='http://openweathermap.org/img/wn/" + results.daily[i].weather[0].icon + ".png' alt='day'>");
-            i++;
-        });
+
+        //**************** CURRENT WEATHER **********************
+        // if ($("#weatherLocation").val() != "") {
+        //     $(".city").html("<h6>" + $("#weatherLocation").val() + "</h6>")
+        // }
+
 
         var dayofWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         $(".current").each(function () {
             var utcSeconds = results.current.dt;
-            var day = new Date(0); // The 0 there is the key, which sets the date to the epoch
+            var day = new Date(utcSeconds * 1000); // The 0 there is the key, which sets the date to the epoch
+            // console.log("utc", day);
+            day.toDateString();
+            // console.log(day);
             day.setUTCSeconds(utcSeconds);
+
+            day.toDateString();
+            // console.log(day);
             $(this).html("<h6>" + dayofWeek[day.getDay()] + "</h6><h6>" + month[day.getMonth()] + " " + day.getDate() + "</h6>");
         });
         $(".current").html("<h6>Current temp: " + Math.round(results.current.temp) + "&#8457;</h6>");
+        //**************** FORECAST WEATHER **********************
 
         var i = 0;
         $(".date").each(function () {
@@ -274,6 +293,11 @@ $(document).ready(function () {
             var day = new Date(0); // The 0 there is the key, which sets the date to the epoch
             day.setUTCSeconds(utcSeconds);
             $(this).html("<h6>" + dayofWeek[day.getDay()] + "</h6><h6>" + month[day.getMonth()] + " " + day.getDate() + "</h6>");
+            i++;
+        });
+        var i = 0;
+        $(".icons").each(function () {
+            $(this).html("<img class='weatherIcon card-img-top' src='http://openweathermap.org/img/wn/" + results.daily[i].weather[0].icon + ".png' alt='day'>");
             i++;
         });
 
@@ -288,6 +312,8 @@ $(document).ready(function () {
             i++;
         });
     }
+    marker.on('dragend', onDragEnd);
+
 
 });
 </script>
