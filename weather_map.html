@@ -186,32 +186,32 @@ var pictures = {
 };
 
 // ************* DISPLAY MAP ON LOAD - Default to San Antonio ******************
-    var coord = [-98.4936, 29.4241];//SA coordinates in Mapbox format
+    var coord = [29.4241, -98.4936]; // lat[0] long[1] standard format
+    var city = "San Antonio, TX"//SA coordinates in Mapbox format
     mapboxgl.accessToken = mapboxToken;
     var mapOptions = {
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: coord, // San Antonio
-        zoom: 9.7,// captures all of 1604 Loop
+        center: [coord[1], coord[0]], // San Antonio
+        zoom: 9.7// captures all of 1604 Loop
     }
     var map = new mapboxgl.Map(mapOptions);
     var marker = new mapboxgl.Marker({color: "red", draggable: true})
-        .setLngLat(coord)
+        .setLngLat([coord[1], coord[0]])
         .addTo(map);
     var PopUp = new mapboxgl.Popup()
         // .setText($("#weatherLocation").val());
     marker.setPopup(PopUp);
-    var geoCoord = {lat: coord[1], lng: coord[0]};
+    var geoCoord = {lat: coord[0], lng: coord[1]};
     getWeather();
     marker.on('dragend', onDragEnd);
 
 // ************* GET CITY FROM LAT LONG ******************
 function findCity(){
     reverseGeocode(geoCoord, mapboxToken).then(function(results) {
-        var city = results.features[3].place_name;
-        var state = 'results.features[0].context[4].text';
-        $(".city").html("<h6>" + city +", " + state + "</h6>")
-    })
+            city = results.features[3].place_name;
+            $(".city").html("<h6>" + city + "</h6>")
+        })
 }
 
 // // ************* GET LOCATION FROM SEARCH ******************
@@ -222,8 +222,8 @@ function findCity(){
         var map = new mapboxgl.Map(mapOptions);
         geocode($("#weatherLocation").val(), mapboxToken).then(function (results) {
             mapOptions.center = results;
-            coord = results;
-            geoCoord = {lat: coord[1], lng: coord[0]};
+            coord = [results[1],results[0]];
+            geoCoord = {lat: coord[0], lng: coord[1]};
             map.flyTo({center: results, zoom: 9.7, duration: 5000})
             var marker = new mapboxgl.Marker({color: "red", draggable: true})
                 .setLngLat(results)
@@ -240,7 +240,7 @@ function findCity(){
 // ************* GET LOCATION FROM MARKER DRAG ******************
     function onDragEnd() {
         coord = marker.getLngLat();
-        coord = [coord.lng, coord.lat];
+        coord = [coord.lat, coord.lng];
         geoCoord = marker.getLngLat();
         getWeather();
         marker.on('dragend', onDragEnd);
@@ -250,9 +250,9 @@ function findCity(){
 
     function getWeather() {
         $.get("https://api.openweathermap.org/data/2.5/onecall", {
-            lon: coord[0],
-            lat: coord[1],
-            exclude: "hourly,minutely,hourly,alerts",
+            lon: coord[1],
+            lat: coord[0],
+            exclude: "hourly,minutely,alerts",
             appid: open_weatherToken,
             units: "imperial"
         }).done(function (results) {
