@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- mapbox CSS and JS -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet'/>
+    <!-- Custom CSS -->
+    <style>
+        #map {
+            margin: 50px;
+            border: 3px solid cornflowerblue;
+        }
+
+        .jumbotron {
+            background-image: url("img/jumbotron_resize.png");
+            background-size: cover;
+            position: relative;
+            font-size: 2rem;
+            color: #F1970E;
+            text-shadow: 0.5px 0px 1px rgba(0, 0, 0, .5);
+            z-index: 5000;
+        }
+
+        main {
+            background-size: cover;
+            background-image: url("img/sunny.jpg");
+            color: #f10e4e;
+            text-shadow: 0.5px 0px 1px rgba(0, 0, 0, .5);
+        }
+
+        snow {
+            background-image: url("img/snow.jpg");
+        }
+
+        .weatherIcon {
+            width: 75px;
+            height: 75px;
+            border: 1px solid cornflowerblue;
+            margin-top: 10px;
+            background-color: white;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.75);
+            /*opacity: 70%;*/
+        }
+
+        .video {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            width: 100vw;
+            object-fit: cover;
+        }
+
+    </style>
+    <title>Accuweather Forecast</title>
+</head>
+<body>
+<div class="jumbotron jumbotron-fluid text-center m-0"> Accuweather</div>
+
+<main>
+    <video autoplay muted loop class="video">
+        <source src="video/clear.mp4">
+    </video>
+    <div class="row d-flex justify-content-start py-3">
+        <div class="col-6 px-0 w-100 d-flex justify-content-start align-items-end">
+            <form class="w-100 mx-5">
+                <div class="form-group">
+                    <label for="weatherLocation">Enter city for weather forecast:</label>
+                    <input type="text" class="form-control" id="weatherLocation" placeholder="San Antonio, TX">
+                </div>
+            </form>
+        </div>
+        <div class="col-6 m-0 p-0 d-flex justify-content-start align-items-end">
+            <button id="weatherBtn" class="btn btn-secondary my-2">Show Me the Weather</button>
+        </div>
+    </div>
+
+
+        <div class="row mx-1 d-flex justify-content-around">
+            <!--  //*************** WEATHER CARDS **********-->
+            <div class="col-2 card mx-1" style="width: 18rem;">
+
+                <div class="card-body">
+                    <h5 class="date card-title">Date</h5>
+                    <div class="icons d-flex justify-content-center"></div>
+                    <p class="low card-text">html with low of day.</p>
+                    <p class="high card-text">html with high of the day.</p>
+                </div>
+            </div>
+            <div class="col-2 card mx-1" style="width: 18rem;">
+                <div class="icons d-flex justify-content-center">
+
+                </div>
+                <div class="card-body">
+                    <h5 class="date card-title">Date</h5>
+                    <p class="low card-text">html with low of day.</p>
+                    <p class="high card-text">html with high of the day.</p>
+                </div>
+            </div>
+            <div class="col-2 card mx-1" style="width: 18rem;">
+                <div class="icons d-flex justify-content-center">
+
+                </div>
+                <div class="card-body">
+                    <h5 class="date card-title">Date</h5>
+                    <p class="low card-text">html with low of day.</p>
+                    <p class="high card-text">html with high of the day.</p>
+                </div>
+            </div>
+            <div class="col-2 card mx-1" style="width: 18rem;">
+                <div class="icons d-flex justify-content-center">
+
+                </div>
+                <div class="card-body">
+                    <h5 class="date card-title">Date</h5>
+                    <p class="low card-text">html with low of day.</p>
+                    <p class="high card-text">html with high of the day.</p>
+                </div>
+            </div>
+            <div class="col-2 card mx-1" style="width: 18rem;">
+                <div class="icons d-flex justify-content-center">
+
+                </div>
+                <div class="card-body">
+                    <h5 class="date card-title">Date</h5>
+                    <p class="low card-text">html with low of day.</p>
+                    <p class="high card-text">html with high of the day.</p>
+                </div>
+            </div>
+        </div>
+        <!--  *************** current city and temp display *****************-->
+    <div class="row mx-5 mt-5">
+        <div class="col-12 d-flex justify-content-center" style="width: 18rem;">
+            <div class="">
+                <div class="city"></div>
+            </div>
+        </div>
+    </div>
+        <div class="row mx-5 mt-5">
+            <div class="col-12 d-flex justify-content-center" style="width: 18rem;">
+                <div class="">
+                    <div class="current"></div>
+                </div>
+            </div>
+        </div>
+        <!--  *************** MAP *****************-->
+        <div class="row d-flex justify-content-center">
+            <div class="column" id='map' style='width: 75vw; height: 50vh;'></div>
+        </div>
+</main>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="js/keys.js"></script>
+<script src="js/mapbox-geocoder-utils.js"></script>
+
+<script>
+    "use strict";
+$(document).ready(function () {
+
+// ************* ARRAY FOR BACKGROUND ******************
+var pictures = {
+    snow:"url('img/snow.jpg')",
+    rain:"url('img/rain.jpg')",
+    fog:"url('img/fog.jpg')",
+    clear:"url('img/clear.jpg')",
+    cloudy:"url('img/cloudy.jpg')"
+};
+
+// ************* DISPLAY MAP ON LOAD - Default to San Antonio ******************
+    var coord = [29.4241, -98.4936]; // lat[0] long[1] standard format
+    var city = "San Antonio, TX"//SA coordinates in Mapbox format
+    mapboxgl.accessToken = mapboxToken;
+    var mapOptions = {
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [coord[1], coord[0]], // San Antonio
+        zoom: 9.7// captures all of 1604 Loop
+    }
+    var map = new mapboxgl.Map(mapOptions);
+    var marker = new mapboxgl.Marker({color: "red", draggable: true})
+        .setLngLat([coord[1], coord[0]])
+        .addTo(map);
+    var PopUp = new mapboxgl.Popup()
+        // .setText($("#weatherLocation").val());
+    marker.setPopup(PopUp);
+    var geoCoord = {lat: coord[0], lng: coord[1]};
+    getWeather();
+    marker.on('dragend', onDragEnd);
+
+// ************* GET CITY FROM LAT LONG ******************
+function findCity(){
+    reverseGeocode(geoCoord, mapboxToken).then(function(results) {
+            city = results.features[3].place_name;
+            $(".city").html("<h6>" + city + "</h6>")
+        })
+}
+
+// // ************* GET LOCATION FROM SEARCH ******************
+// // ************* converts address to lat long ******************
+
+    $("#weatherBtn").click(function (e) {
+        e.preventDefault();
+        var map = new mapboxgl.Map(mapOptions);
+        geocode($("#weatherLocation").val(), mapboxToken).then(function (results) {
+            mapOptions.center = results;
+            coord = [results[1],results[0]];
+            geoCoord = {lat: coord[0], lng: coord[1]};
+            map.flyTo({center: results, zoom: 9.7, duration: 5000})
+            var marker = new mapboxgl.Marker({color: "red", draggable: true})
+                .setLngLat(results)
+                .addTo(map);
+            var PopUp = new mapboxgl.Popup()
+                // .setText($("#weatherLocation").val());
+            marker.setPopup(PopUp);
+            getWeather();
+            marker.on('dragend', onDragEnd);
+
+        });
+    });
+
+// ************* GET LOCATION FROM MARKER DRAG ******************
+    function onDragEnd() {
+        coord = marker.getLngLat();
+        coord = [coord.lat, coord.lng];
+        geoCoord = marker.getLngLat();
+        getWeather();
+        marker.on('dragend', onDragEnd);
+    }
+// ************* GET WEATHER ******************
+// ************* needs coord to work ******************
+
+    function getWeather() {
+        $.get("https://api.openweathermap.org/data/2.5/onecall", {
+            lon: coord[1],
+            lat: coord[0],
+            exclude: "hourly,minutely,alerts",
+            appid: open_weatherToken,
+            units: "imperial"
+        }).done(function (results) {
+           findCity();
+            displayWeather(results);
+        });
+    }
+// ************* DISPLAY WEATHER ******************
+
+    function displayWeather(results) {
+
+        //**************** CURRENT WEATHER **********************
+        // if ($("#weatherLocation").val() != "") {
+        //     $(".city").html("<h6>" + $("#weatherLocation").val() + "</h6>")
+        // }
+
+
+        var dayofWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        $(".current").each(function () {
+            var utcSeconds = results.current.dt;
+            var day = new Date(utcSeconds * 1000); // The 0 there is the key, which sets the date to the epoch
+            // console.log("utc", day);
+            day.toDateString();
+            // console.log(day);
+            day.setUTCSeconds(utcSeconds);
+
+            day.toDateString();
+            // console.log(day);
+            $(this).html("<h6>" + dayofWeek[day.getDay()] + "</h6><h6>" + month[day.getMonth()] + " " + day.getDate() + "</h6>");
+        });
+        $(".current").html("<h6>Current temp: " + Math.round(results.current.temp) + "&#8457;</h6>");
+        //**************** FORECAST WEATHER **********************
+
+        var i = 0;
+        $(".date").each(function () {
+            var utcSeconds = results.daily[i].dt;
+            var day = new Date(0); // The 0 there is the key, which sets the date to the epoch
+            day.setUTCSeconds(utcSeconds);
+            $(this).html("<h6>" + dayofWeek[day.getDay()] + "</h6><h6>" + month[day.getMonth()] + " " + day.getDate() + "</h6>");
+            i++;
+        });
+        var i = 0;
+        $(".icons").each(function () {
+            $(this).html("<img class='weatherIcon card-img-top' src='http://openweathermap.org/img/wn/" + results.daily[i].weather[0].icon + ".png' alt='day'>");
+            i++;
+        });
+
+        var i = 0;
+        $(".low").each(function () {
+            $(this).html("<h6>Min temp: " + Math.round(results.daily[i].temp.min) + "&#8457;</h6>");
+            i++;
+        })
+        var i = 0;
+        $(".high").each(function () {
+            $(this).html("<h6>Max temp: " + Math.round(results.daily[i].temp.max) + "&#8457;</h6>");
+            i++;
+        });
+    }
+    marker.on('dragend', onDragEnd);
+
+
+});
+</script>
+</body>
+</html>

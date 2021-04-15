@@ -1,0 +1,65 @@
+#map {
+    margin: 50px;
+    border: 3px solid cornflowerblue;
+}
+.mapOverlay {
+    width: 18vw;
+    height: 25vh;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    position: absolute;
+    top: 400px;
+    left: 228px;
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 11px;
+    line-height: 18px;
+    border-radius: 3px;
+    display: none;
+}
+
+.navbar {
+    position: relative;
+    font-size: 1rem;
+    z-index: 5000;
+    opacity: 85%;
+}
+
+main {
+    /*background-size: cover;*/
+    /*background-image: url("img/sunny.jpg");*/
+    color: #f10e4e;
+    text-shadow: 0.5px 0px 1px rgba(0, 0, 0, .5);
+}
+
+.weatherIcon {
+    width: 75px;
+    height: 75px;
+    border: 1px solid cornflowerblue;
+    margin: 5px;
+    background-color: white;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    /*opacity: 70%;*/
+}
+
+.video {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    object-fit: cover;
+}
+/*.video {*/
+/*    position: fixed;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    min-width: 100%;*/
+/*    min-height: 100%;*/
+/*    width: auto;*/
+/*    height: auto;*/
+/*    z-index: -100;*/
+/*    transform: translate(-50%, -50%);*/
+/*}*/
