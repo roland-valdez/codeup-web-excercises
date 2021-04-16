@@ -121,56 +121,39 @@ $(document).ready(function () {
             $(this).html("<h6>" + dayofWeek[day.getDay()] + "</h6><h6>" + month[day.getMonth()] + " " + day.getDate() + "</h6>");
             i++;
         });
-        var i = 0;
-        $(".icons").each(function () {
+        $(".icons").each(function (i) {
             var weatherIcon = results.daily[i].weather[0].icon;
             // console.log(weatherIcon);
             $(this).html("<img class='weatherIcon card-img-top' src='http://openweathermap.org/img/wn/" + weatherIcon + ".png' alt='day'>");
             if (i == 0 ){
                var weatherMain = results.daily[0].weather[0].main;
-                console.log(weatherMain);
                 if (weatherMain === "Rain" || weatherMain === "Drizzle") {
                     $(".video").html("<source src='video/rain.mp4'>");
-                    document.getElementById("myvideo").load();
                 }
                 else if (weatherMain === "Snow") {
                     $(".video").html("<source src='video/snow.mp4'>");
-                    document.getElementById("myvideo").load();
                 }
                 else if (weatherIcon === "50d") {
                     $(".video").html("<source src='video/fog.mp4'>");
-                    document.getElementById("myvideo").load();
                 }
                 else if (weatherMain === "Thunderstorm") {
                     $(".video").html("<source src='video/thunder.mp4'>");
-                    document.getElementById("myvideo").load();
                 }
                 else if (weatherMain === "Clear") {
                     $(".video").html("<source src='video/clear.mp4'>");
-                    document.getElementById("myvideo").load();
                 }
                 else if (weatherMain === "Clouds") {
                     $(".video").html("<source src='video/cloudy.mp4'>");
-                    document.getElementById("myvideo").load();
-
                 }
+                document.getElementById("myvideo").load();
             }
-            i++;
         });
-
-        var i = 0;
-        $(".low").each(function () {
+        $(".low").each(function (i) {
             $(this).html("<h6>Min temp: " + Math.round(results.daily[i].temp.min) + "&#8457;</h6>");
-            i++;
         })
-        var i = 0;
-        $(".high").each(function () {
+        $(".high").each(function (i) {
             $(this).html("<h6>Max temp: " + Math.round(results.daily[i].temp.max) + "&#8457;</h6>");
-            i++;
         });
     }
-
     marker.on('dragend', onDragEnd);
-
-
 });
