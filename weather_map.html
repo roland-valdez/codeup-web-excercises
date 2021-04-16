@@ -19,30 +19,29 @@
   <title>Accuweather Forecast</title>
 </head>
 <body>
-
-
-
 <main>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
     <h6 class="navbar-brand">Weather</h6>
     <div class="navbar-nav ml-auto">
       <form class="form-inline my-2 my-lg-0">
-
         <input class="form-control mr-sm-2" type="text" id="weatherLocation" placeholder="City, State">
         <button class="btn btn-outline-info my-2 my-sm-0" id="weatherBtn" >Search Weather</button>
-
       </form>
     </div>
   </nav>
   <video autoplay muted loop id="myvideo" class="video">
-<!--    <source id="mp4" src='video/snow.mp4'>-->
-<!--        <source>-->
-
-    <!--    <source id="clouds" src='video/clouds.mp4'>-->
   </video>
-
-  <!--  //*************** WEATHER CARDS **********-->
+<!--  //*************** WEATHER CARDS **********-->
   <div class="row mx-1 mt-5 d-flex justify-content-around">
+    <div class="col-2 card mx-1" style="width: 18rem;">
+      <div class="card-body">
+        <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">Date
+        </div>
+        <div class="icons d-flex justify-content-center"></div>
+        <p class="low card-text m-0 d-flex justify-content-center">html with low of day.</p>
+        <p class="high card-text m-0 d-flex justify-content-center">html with high of the day.</p>
+      </div>
+    </div>
     <div class="col-2 card mx-1" style="width: 18rem;">
       <div class="card-body">
         <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">Date
@@ -101,7 +100,6 @@
     <pre id="mapOverlay" class="mapOverlay"></pre>
   </div>
 </main>
-
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -113,12 +111,8 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 <script src="js/keys.js"></script>
-
 <script src="js/mapbox-geocoder-utils.js"></script>
 <script src="js/weather_map.js"></script>
-
-
-
 
 </body>
 </html>
