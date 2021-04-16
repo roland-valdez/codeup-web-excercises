@@ -67,27 +67,19 @@ $(document).ready(function () {
 // ************* GET LOCATION FROM MARKER DRAG ******************
     function onDragEnd() {
         coord = marker.getLngLat();
+        map.flyTo({center: coord, duration: 1000});
         coord = [coord.lat, coord.lng];
+
         getWeather(coord);
     }
 
 // ************* DISPLAY WEATHER ******************
 
     function displayWeather(results) {
-        //**************** CURRENT WEATHER **********************
+        console.log(results)
+
         var dayofWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        $(".current").each(function () {
-            var utcSeconds = results.current.dt;
-            var day = new Date(utcSeconds * 1000); // The 0 there is the key, which sets the date to the epoch
-            day.toDateString();
-            day.setUTCSeconds(utcSeconds);
-
-            day.toDateString();
-            $(this).html("<h6>" + dayofWeek[day.getDay()] + "</h6><h6>" + month[day.getMonth()] + " " + day.getDate() + "</h6>");
-        });
-        $(".current").html("<h6>Current temp: " + Math.round(results.current.temp) + "&#8457;</h6>");
-
         //**************** FORECAST WEATHER **********************
         var i = 0;
         $(".date").each(function () {
