@@ -51,6 +51,7 @@ main {
     top: 0;
     width: 100vw;
     object-fit: cover;
+    z-index: -1000;
 }
 /*.video {*/
 /*    position: fixed;*/

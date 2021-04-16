@@ -1,15 +1,6 @@
 "use strict";
 $(document).ready(function () {
 
-// ************* ARRAY FOR BACKGROUND ******************
-    var pictures = {
-        snow: "url('img/snow.jpg')",
-        rain: "url('img/rain.jpg')",
-        fog: "url('img/fog.jpg')",
-        clear: "url('img/clear.jpg')",
-        cloudy: "url('img/cloudy.jpg')"
-    };
-
 // ************* DISPLAY MAP ON LOAD - Default to San Antonio ******************
     var coord = [29.4241, -98.4936]; // lat[0] long[1] standard format
     var city = "San Antonio, TX"//SA coordinates in Mapbox format
@@ -24,63 +15,12 @@ $(document).ready(function () {
     var marker = new mapboxgl.Marker({color: "red", draggable: true})
         .setLngLat([coord[1], coord[0]])
         .addTo(map);
-    var PopUp = new mapboxgl.Popup()
-// .setText($("#weatherLocation").val());
-    marker.setPopup(PopUp);
-    var geoCoord = {lat: coord[0], lng: coord[1]};
-    getWeather();
-
-    // overlay();
+    getWeather(coord);
     marker.on('dragend', onDragEnd);
 
-// ************* Map overlay ******************
-//     function overlay (){ $(".mapOverlay").css("display", "block").html("Display Adddress, current temp, wind  and description")};
-// ************* GET CITY FROM LAT LONG ******************
-    function findCity() {
-        reverseGeocode(geoCoord, mapboxToken).then(function (results) {
-            city = results.features[3].place_name;
-            $(".city").html("<h6>" + city + "</h6>")
-        })
-    }
-
-// // ************* GET LOCATION FROM SEARCH ******************
-// // ************* converts address to lat long ******************
-
-    $("#weatherBtn").click(function (e) {
-        e.preventDefault();
-        var map = new mapboxgl.Map(mapOptions);
-        geocode($("#weatherLocation").val(), mapboxToken).then(function (results) {
-            // console.log(results);
-            mapOptions.center = results;
-            coord = [results[1], results[0]];
-            geoCoord = {lat: coord[0], lng: coord[1]};
-            map.flyTo({center: results, zoom: 9.7, duration: 5000})
-            var marker = new mapboxgl.Marker({color: "red", draggable: true})
-                .setLngLat(results)
-                .addTo(map);
-            var PopUp = new mapboxgl.Popup()
-// .setText($("#weatherLocation").val());
-            marker.setPopup(PopUp);
-            getWeather();
-            marker.on('dragend', onDragEnd);
-
-        });
-    });
-
-// ************* GET LOCATION FROM MARKER DRAG ******************
-    function onDragEnd() {
-        coord = marker.getLngLat();
-        // overlay();
-        coord = [coord.lat, coord.lng];
-        geoCoord = marker.getLngLat();
-        getWeather();
-        marker.on('dragend', onDragEnd);
-    }
-
 // ************* GET WEATHER ******************
-// ************* needs coord to work ******************
-
-    function getWeather() {
+    function getWeather(coord) {
+        findCity(coord);
         $.get("https://api.openweathermap.org/data/2.5/onecall", {
             lon: coord[1],
             lat: coord[0],
@@ -88,17 +28,53 @@ $(document).ready(function () {
             appid: open_weatherToken,
             units: "imperial"
         }).done(function (results) {
-            console.log(results);
-            findCity();
             displayWeather(results);
         });
+    }
+
+// ************* GET CITY FROM LAT LONG ******************
+    function findCity(coord) {
+        $.get("https://api.openweathermap.org/data/2.5/forecast", {
+            lon: coord[1],
+            lat: coord[0],
+            appid: open_weatherToken,
+            units: "imperial"
+        }).done(function (results) {
+            city = results.city.name;
+            $(".city").html("<h6>Current city: " + city + "</h6>").css("color","black");
+        });
+    }
+
+// // ************* GET LOCATION FROM SEARCH BOX******************
+
+    $("#weatherBtn").click(search);
+    function search(e) {
+        e.preventDefault();
+        var map = new mapboxgl.Map(mapOptions);
+        geocode($("#weatherLocation").val(), mapboxToken).then(function (results) {
+            mapOptions.center = results;
+            coord = [results[1], results[0]];// in open weather format for getWeather()
+            map.flyTo({center: results, zoom: 9.7, duration: 5000})
+            marker = new mapboxgl.Marker({color: "red", draggable: true})
+                .setLngLat(results)
+                .addTo(map);
+            marker.on('dragend', onDragEnd);
+            getWeather(coord);
+        });
+    }
+
+
+// ************* GET LOCATION FROM MARKER DRAG ******************
+    function onDragEnd() {
+        coord = marker.getLngLat();
+        coord = [coord.lat, coord.lng];
+        getWeather(coord);
     }
 
 // ************* DISPLAY WEATHER ******************
 
     function displayWeather(results) {
-
-//**************** CURRENT WEATHER **********************
+        //**************** CURRENT WEATHER **********************
         var dayofWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         $(".current").each(function () {
@@ -112,7 +88,7 @@ $(document).ready(function () {
         });
         $(".current").html("<h6>Current temp: " + Math.round(results.current.temp) + "&#8457;</h6>");
 
-//**************** FORECAST WEATHER **********************
+        //**************** FORECAST WEATHER **********************
         var i = 0;
         $(".date").each(function () {
             var utcSeconds = results.daily[i].dt;
@@ -123,7 +99,6 @@ $(document).ready(function () {
         });
         $(".icons").each(function (i) {
             var weatherIcon = results.daily[i].weather[0].icon;
-            // console.log(weatherIcon);
             $(this).html("<img class='weatherIcon card-img-top' src='http://openweathermap.org/img/wn/" + weatherIcon + ".png' alt='day'>");
             if (i == 0 ){
                var weatherMain = results.daily[0].weather[0].main;
@@ -155,5 +130,4 @@ $(document).ready(function () {
             $(this).html("<h6>Max temp: " + Math.round(results.daily[i].temp.max) + "&#8457;</h6>");
         });
     }
-    marker.on('dragend', onDragEnd);
 });
