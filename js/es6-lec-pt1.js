@@ -163,7 +163,7 @@ let program = {
 }
 
 
-console.log(program.length);
+console.log(`${program.name} has facilities in ${program.location} and it offers a ${program.length} intensive bootcamp that covers ${program.technology} among other things.`);
 
 
 
@@ -214,9 +214,11 @@ function sayHello(name){
     return `Hello ${name}`;
 }
 
+console.log(sayHello("Roland"));
 
+let sayHello2 = (name) => `Hello ${name}!`;
 
-
+console.log(sayHello2("Norma"));
 // console.log(sayHelloAgain("Douglas")); //Hello Douglas
 // console.log(sayHelloAgain("Justin")); //Hello Justin
 // console.log(sayHelloAgain("Kenneth")); //Hello Kenneth
@@ -251,13 +253,15 @@ console.log(sum(1, 9)); //10
 function addOne(arg1) {
     return arg1 + 1;
 }
-
+console.log(addOne(2));
+let addOne2 = (arg1) => arg1 +1;
+console.log(addOne2(2));
 
 //function expression
 let addOneA = function(arg1){
     return arg1 + 1;
 }
-
+// let addOneA2 = (arg1)
 
 //refactor. Remove function keyword and add =>
 let addOneB = (arg1) => {
@@ -302,8 +306,9 @@ const addOneD = arg1 => arg1 + 1;
 // }
 
 
-let log = (sum = 2, name = "Roland") => {``}
-
+// let log = (sum = 2, name = "Roland") => {``}
+let sum2 = (a = 0, b = 0) => a + b;
+console.log(sum2(5));
 
 // console.log(sayHello2());; // "Hello, World!"
 // console.log(sayHello2('codeup'));; // "Hello, codeup!"
@@ -324,3 +329,6 @@ function helloCohort(greeting, cohort){
 
     return greeting + " " + cohort;
 }
+let helloCohort2 = (greeting = "Good Morning", cohort = "Marco") => `${greeting} ${cohort}`;
+
+console.log(helloCohort2());

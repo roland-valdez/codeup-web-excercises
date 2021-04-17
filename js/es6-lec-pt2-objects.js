@@ -10,22 +10,27 @@
 // let dogName = "Kewpie";
 // let isCute = true;
 
-//old way
+// old way
 // let oldDog = {
 // 	breed: breed,
 // 	age: age,
 // 	dogName: dogName,
 // 	isCute: isCute
 // }
-//
+
 // console.log(oldDog);
 
 
 
 // //new way
 
-
-
+// let newDog = {
+//     breed,
+//     age,
+//     dogName,
+//     isCute
+// }
+//
 // console.log(newDog);
 
 
@@ -43,19 +48,19 @@ var personA = {
     age: 4
 };
 
-// // old way
+// old way
 // var name = personA.name;
 // var age = personA.age;
-//
-//
+
+
 // console.log(name); // 'codeup'
 // console.log(age); // 4
 
 
 //TODO TOGETHER: REFACTOR the above approach using ES6
 
-
-
+// let {name, age} = personA
+//
 // console.log(name);
 // console.log(age);
 
@@ -86,11 +91,11 @@ const pals = {
 
 //TODO TOGETHER: REFACTOR the above approach using ES6
 //new way
+let {dog, cat, mouse} = pals
 
-
-// console.log(dog);
-// console.log(cat);
-// console.log(mouse);
+console.log(dog);
+console.log(cat);
+console.log(mouse);
 
 
 /*==============================================*/
@@ -141,7 +146,8 @@ const alphabet = ['A', 'B', 'C', 'D', 'E'];
 
 //TODO TOGETHER: new way
 
-
+// let [a,b,c] = alphabet;
+//
 // console.log(a);
 // console.log(b);
 // console.log(c);
@@ -150,20 +156,22 @@ const alphabet = ['A', 'B', 'C', 'D', 'E'];
 
 //TODO TOGETHER: To skip an element...
 
-
+// let [a, ,c] = alphabet;
+//
 // console.log(a);
 // // console.log(b);
 // console.log(c);
-// console.log(d);
+// // console.log(d);
 
 
 //TODO TOGETHER: To get all elements...Spread operator *BONUS
 
+let [a, b, c, ...rest] = alphabet
 
-// console.log(a);
-// console.log(b);
-// console.log(c);
-// console.log(rest);
+console.log(a);
+console.log(b);
+console.log(c);
+console.log(rest);
 
 
 /*==============================================*/
@@ -183,30 +191,42 @@ const alphabet = ['A', 'B', 'C', 'D', 'E'];
 
 
 //
-// const person = {
-// 	name: 'Douglas',
-// 	age: 38
-// };
-//
-// tellMeAbout(person);
+const person = {
+	name: 'Douglas',
+	age: 38
+};
+
+function tellMeAbout({name, age}){
+    console.log(name); // 'codeup'
+	console.log(age); // 4
+}
+
+tellMeAbout(person);
 
 
 /*==============================================*/
 
 
 
-// let shape1 = {
-// 	height: 10,
-// 	width: 10
-// }
+let shape1 = {
+	height: 10,
+	width: 10
+}
 
-// let shape2 = {
-// 	height: 5,
-// 	width: 5
-// }
-
-// console.log(getArea(shape1)); //100
-// console.log(getArea(shape2)); //25
+let shape2 = {
+	height: 5,
+	width: 5
+}
+function getArea({height, width}){
+    return height * width;
+}
+console.log(getArea(shape1)); //100
+console.log(getArea(shape2)); //25
 
 
 //TODO: Refactor the getArea function from above using arrow syntax
+
+let getArea2 = ({width, height}) => width * height;
+
+console.log(getArea2(shape1)); //100
+console.log(getArea2(shape2)); //25
