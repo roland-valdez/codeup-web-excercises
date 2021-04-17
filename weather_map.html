@@ -22,7 +22,11 @@
 <main>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
     <h6 class="navbar-brand">Weather</h6>
+    <div class="city mx-auto navbar-light">
+
+    </div>
     <div class="navbar-nav ml-auto">
+
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" id="weatherLocation" placeholder="City, State">
         <button class="btn btn-outline-info my-2 my-sm-0" id="weatherBtn" >Search Weather</button>
@@ -38,8 +42,8 @@
         <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">Date
         </div>
         <div class="icons d-flex justify-content-center"></div>
-        <p class="low card-text m-0 d-flex justify-content-center">html with low of day.</p>
-        <p class="high card-text m-0 d-flex justify-content-center">html with high of the day.</p>
+        <p class="weather card-text m-0 d-flex justify-content-center"></p>
+        <p class="high card-text m-0 d-flex justify-content-center"></p>
       </div>
     </div>
     <div class="col-2 card mx-1" style="width: 18rem;">
@@ -47,8 +51,8 @@
         <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">Date
         </div>
         <div class="icons d-flex justify-content-center"></div>
-        <p class="low card-text m-0 d-flex justify-content-center">html with low of day.</p>
-        <p class="high card-text m-0 d-flex justify-content-center">html with high of the day.</p>
+        <p class="weather card-text m-0 d-flex justify-content-center"></p>
+        <p class="high card-text m-0 d-flex justify-content-center"></p>
       </div>
     </div>
     <div class="col-2 card mx-1" style="width: 18rem;">
@@ -56,8 +60,8 @@
         <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">Date
         </div>
         <div class="icons d-flex justify-content-center"></div>
-        <p class="low card-text m-0 d-flex justify-content-center">html with low of day.</p>
-        <p class="high card-text m-0 d-flex justify-content-center">html with high of the day.</p>
+        <p class="weather card-text m-0 d-flex justify-content-center"></p>
+        <p class="high card-text m-0 d-flex justify-content-center"></p>
       </div>
     </div>
     <div class="col-2 card mx-1" style="width: 18rem;">
@@ -65,8 +69,8 @@
         <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">Date
         </div>
         <div class="icons d-flex justify-content-center"></div>
-        <p class="low card-text m-0 d-flex justify-content-center">html with low of day.</p>
-        <p class="high card-text m-0 d-flex justify-content-center">html with high of the day.</p>
+        <p class="weather card-text m-0 d-flex justify-content-center"></p>
+        <p class="high card-text m-0 d-flex justify-content-center"></p>
       </div>
     </div>
     <div class="col-2 card mx-1" style="width: 18rem;">
@@ -74,32 +78,47 @@
         <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">Date
         </div>
         <div class="icons d-flex justify-content-center"></div>
-        <p class="low card-text m-0 d-flex justify-content-center">html with low of day.</p>
-        <p class="high card-text m-0 d-flex justify-content-center">html with high of the day.</p>
+        <p class="weather card-text m-0 d-flex justify-content-center"></p>
+        <p class="high card-text m-0 d-flex justify-content-center"></p>
       </div>
     </div>
   </div>
-  <!--  *************** current city and temp display *****************-->
-  <!--    <div class="row mx-5 mt-5">-->
-  <!--        <div class="col-12 d-flex justify-content-center" style="width: 18rem;">-->
-  <!--            <div class="">-->
-  <!--                <div class="city"></div>-->
-  <!--            </div>-->
-  <!--        </div>-->
-  <!--    </div>-->
-  <!--    <div class="row mx-5 mt-5">-->
-  <!--        <div class="col-12 d-flex justify-content-center" style="width: 18rem;">-->
-  <!--            <div class="">-->
-  <!--                <div class="current"></div>-->
-  <!--            </div>-->
-  <!--        </div>-->
-  <!--    </div>-->
+
+  <div class="settings">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+      Map Settings
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Map View settings</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            HTML
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-info" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-outline-info">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <!--  *************** MAP *****************-->
-  <div class="row d-flex justify-content-center">
+  <div class="row d-flex justify-content-center mb-0">
     <div class="column" id='map' style='width: 65vw; height: 50vh;'></div>
     <pre id="mapOverlay" class="mapOverlay"></pre>
   </div>
-</main>
+
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -113,6 +132,6 @@
 <script src="js/keys.js"></script>
 <script src="js/mapbox-geocoder-utils.js"></script>
 <script src="js/weather_map.js"></script>
-
+</main>
 </body>
 </html>
