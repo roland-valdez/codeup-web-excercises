@@ -4,6 +4,7 @@ $(document).ready(function () {
 // ************* DISPLAY MAP ON LOAD - Default to San Antonio ******************
     var coord = [32.3863, -94.8758]; // lat[0] long[1] standard format
     // var coord = [29.4241, -98.4936]; // lat[0] long[1] standard format
+    var lngLat = coord;
 
     var city = "San Antonio, TX"//SA coordinates in Mapbox format
     mapboxgl.accessToken = mapboxToken;
@@ -22,7 +23,7 @@ $(document).ready(function () {
 
     // ************* GET GEOLOCATION ******************
     $(".geolocation").click(function () {
-        console.log("inside geo")
+
     geoLocation();
 
     });
@@ -35,28 +36,22 @@ $(document).ready(function () {
 
          function success(pos) {
              var crd = pos.coords;
-
-             console.log('Your current position is:');
-             console.log(`Latitude : ${crd.latitude}`);
-             console.log(`Longitude: ${crd.longitude}`);
-             console.log(`More or less ${crd.accuracy} meters.`);
              coord = [crd.latitude,crd.longitude];
              map = new mapboxgl.Map(mapOptions);
-             var lngLat = [coord[1], coord[0]];
+             lngLat = [coord[1], coord[0]];
              map.flyTo({center: lngLat, zoom: 9.7, duration: 5000})
-             var marker = new mapboxgl.Marker({color: "red", draggable: true})
+             marker = new mapboxgl.Marker({color: "red", draggable: true})
                  .setLngLat(lngLat)
                  .addTo(map);
+             console.log("geo coord", coord);
+             console.log("geo lngLat", lngLat);
              marker.on('dragend', onDragEnd);
              getWeather(coord);
          }
-
          function error(err) {
              console.warn(`ERROR(${err.code}): ${err.message}`);
          }
-
          navigator.geolocation.getCurrentPosition(success, error, options);
-
      }
 
 // ************* GET WEATHER ******************
@@ -70,6 +65,7 @@ $(document).ready(function () {
             units: "imperial"
         }).done(function (results) {
             console.log(results);
+            $("#current").html("<h6>it is <span>" + Math.round(results.current.temp) + "&#8457;</span> with <span>" + results.current.weather[0].description + "</span></h6>");
             displayWeather(results);
         });
     }
@@ -83,7 +79,8 @@ $(document).ready(function () {
             units: "imperial"
         }).done(function (results) {
             city = results.city.name;
-            $(".city").html("<h6>Current city: " + city + "</h6>").css("color","black");
+
+            $(".city").html("<h6>Current city: <span>" + city + "</span> </h6>");
         });
     }
 
@@ -105,15 +102,49 @@ $(document).ready(function () {
         });
     }
 
-
 // ************* GET LOCATION FROM MARKER DRAG ******************
     function onDragEnd() {
         coord = marker.getLngLat();
-        var lngLat = coord;
+        console.log("drag coord", coord);
+         lngLat = coord;
+        console.log("drag lngLat", lngLat);
+
         map.flyTo({center: lngLat, zoom: 9.7, duration: 1000});
         coord = [coord.lat, coord.lng];
         getWeather(coord);
     }
+
+// ************* MAP SETTINGS ******************
+
+    $("#settingBtn").click(function(){
+        coord = marker.getLngLat();
+        mapOptions.center = coord;
+        if($(".mapView").val() === "satellite"){
+            mapOptions.style = 'mapbox://styles/mapbox/satellite-streets-v11';
+            map = new mapboxgl.Map(mapOptions);
+            marker = new mapboxgl.Marker({color: "red", draggable: true})
+                .setLngLat(mapOptions.center)
+                .addTo(map);
+        }else{
+            mapOptions.style = 'mapbox://styles/mapbox/streets-v11';
+            map = new mapboxgl.Map(mapOptions);
+            marker = new mapboxgl.Marker({color: "red", draggable: true})
+                .setLngLat(mapOptions.center)
+                .addTo(map);
+        }
+        if($("#darkMode").prop("checked") === true){
+
+        }else{
+
+        }
+        if($("#alerts").prop("checked") !== true){
+            $("#mapOverlay").addClass("hidden");
+        }else{
+            $("#mapOverlay").removeClass("hidden");
+        }
+        marker.on('dragend', onDragEnd);
+    });
+
 
 // ************* DISPLAY WEATHER ******************
 
@@ -126,7 +157,7 @@ $(document).ready(function () {
         }else {
             $("#mapOverlay").html("<div>NO WEATHER ALERTS AT THIS TIME</div>");
         }
-        // console.log(results.alerts[0].event);
+
         //**************** FORECAST WEATHER **********************
         var i = 0;
         $(".date").each(function () {

@@ -23,11 +23,10 @@
 <body>
 
 <main>
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(255, 255, 255, 0.9);">
     <h6 class="navbar-brand">Weather</h6>
-    <div class="city mx-auto navbar-light">
-
-    </div>
+    <div class="city ml-auto navbar-light"></div>
+    <div id="current" class="navbar-light ml-1"></div>
     <div class="navbar-nav ml-auto">
       <div class="geolocation mx-2">
        <a id="geoLocation"><i class="fas fa-map-marker-alt"></i></a>
@@ -44,7 +43,7 @@
   <div class="row mx-1 mt-2 d-flex justify-content-around">
     <div class="col-2 card mx-1" style="width: 18rem;">
       <div class="card-body">
-        <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">Date
+        <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">
         </div>
         <div class="icons d-flex justify-content-center"></div>
         <p class="weather card-text m-0 d-flex justify-content-center"></p>
@@ -53,7 +52,7 @@
     </div>
     <div class="col-2 card mx-1" style="width: 18rem;">
       <div class="card-body">
-        <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">Date
+        <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">
         </div>
         <div class="icons d-flex justify-content-center"></div>
         <p class="weather card-text m-0 d-flex justify-content-center"></p>
@@ -62,7 +61,7 @@
     </div>
     <div class="col-2 card mx-1" style="width: 18rem;">
       <div class="card-body">
-        <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">Date
+        <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">
         </div>
         <div class="icons d-flex justify-content-center"></div>
         <p class="weather card-text m-0 d-flex justify-content-center"></p>
@@ -71,7 +70,7 @@
     </div>
     <div class="col-2 card mx-1" style="width: 18rem;">
       <div class="card-body">
-        <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">Date
+        <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">
         </div>
         <div class="icons d-flex justify-content-center"></div>
         <p class="weather card-text m-0 d-flex justify-content-center"></p>
@@ -80,7 +79,7 @@
     </div>
     <div class="col-2 card mx-1" style="width: 18rem;">
       <div class="card-body">
-        <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">Date
+        <div class="date card-title d-flex flex-column align-items-center justify-content-center mb-0">
         </div>
         <div class="icons d-flex justify-content-center"></div>
         <p class="weather card-text m-0 d-flex justify-content-center"></p>
@@ -94,7 +93,7 @@
   <div class="row d-flex justify-content-center mb-0 w-100">
     <!--  *************** MAP *****************-->
     <div class="col-2">
-          <div id="mapOverlay" class="mapOverlay">hello</div>
+          <div id="mapOverlay" class="mapOverlay hidden"></div>
 
     </div>
     <div class="col-6" id='map' style='width: 65vw; height: 50vh;'></div>
@@ -108,7 +107,7 @@
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
            aria-hidden="true">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
+          <div class="modal-content bg-light">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Map View settings</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -118,9 +117,9 @@
             <div class="modal-body">
               <div>
               <label>Change Map Views</label>
-                <select class="form-control form-control-sm custom-select">
+                <select class="form-control form-control-sm custom-select mapView">
                   <option value="default">Default</option>
-                  <option value="satellite">Sattelite View</option>
+                  <option value="satellite">Satellite View</option>
                 </select>
                 </div>
               <div class="form-group form-check my-3">
