@@ -38,13 +38,13 @@ $(document).ready(function () {
             console.log(`More or less ${crd.accuracy} meters.`);
             coord = [crd.latitude,crd.longitude];
             // coord = [results[1], results[0]];// in open weather format for getWeather()
-
+            console.log("geo", coord);
             map = new mapboxgl.Map(mapOptions);
-            // var results = coord;
-            mapOptions.center = coord;
-            map.flyTo({center: coord, zoom: 9.7, duration: 5000})
+            var lngLat = [coord[1], coord[0]];
+            // mapOptions.center = coord;// center in [-74.5, 40] format
+            map.flyTo({center: lngLat, zoom: 9.7, duration: 5000})
             var marker = new mapboxgl.Marker({color: "red", draggable: true})
-                .setLngLat(coord)
+                .setLngLat(lngLat)
                 .addTo(map);
             marker.on('dragend', onDragEnd);
             getWeather(coord);
@@ -93,6 +93,7 @@ $(document).ready(function () {
         map = new mapboxgl.Map(mapOptions);
         geocode($("#weatherLocation").val(), mapboxToken).then(function (results) {
             mapOptions.center = results;
+            console.log("click", results);
             coord = [results[1], results[0]];// in open weather format for getWeather()
             map.flyTo({center: results, zoom: 9.7, duration: 5000})
             marker = new mapboxgl.Marker({color: "red", draggable: true})
@@ -107,6 +108,7 @@ $(document).ready(function () {
 // ************* GET LOCATION FROM MARKER DRAG ******************
     function onDragEnd() {
         coord = marker.getLngLat();
+        console.log("on drag", coord);
         map.flyTo({center: coord, duration: 1000});
         coord = [coord.lat, coord.lng];
 
