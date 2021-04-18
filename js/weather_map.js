@@ -2,7 +2,9 @@
 $(document).ready(function () {
 
 // ************* DISPLAY MAP ON LOAD - Default to San Antonio ******************
-    var coord = [29.4241, -98.4936]; // lat[0] long[1] standard format
+    var coord = [19.4241, -88.4936]; // lat[0] long[1] standard format
+    // var coord = [29.4241, -98.4936]; // lat[0] long[1] standard format
+
     var city = "San Antonio, TX"//SA coordinates in Mapbox format
     mapboxgl.accessToken = mapboxToken;
     var mapOptions = {
@@ -18,6 +20,44 @@ $(document).ready(function () {
     getWeather(coord);
     marker.on('dragend', onDragEnd);
 
+    // ************* GET GEOLOCATION ******************
+    $(".geolocation").click(function () {
+        console.log("inside geo")
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+
+        function success(pos) {
+            var crd = pos.coords;
+
+            console.log('Your current position is:');
+            console.log(`Latitude : ${crd.latitude}`);
+            console.log(`Longitude: ${crd.longitude}`);
+            console.log(`More or less ${crd.accuracy} meters.`);
+            coord = [crd.latitude,crd.longitude];
+            // coord = [results[1], results[0]];// in open weather format for getWeather()
+
+            map = new mapboxgl.Map(mapOptions);
+            // var results = coord;
+            mapOptions.center = coord;
+            map.flyTo({center: coord, zoom: 9.7, duration: 5000})
+            var marker = new mapboxgl.Marker({color: "red", draggable: true})
+                .setLngLat(coord)
+                .addTo(map);
+            marker.on('dragend', onDragEnd);
+            getWeather(coord);
+        }
+
+        function error(err) {
+            console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
+
+        navigator.geolocation.getCurrentPosition(success, error, options);
+
+
+    });
 // ************* GET WEATHER ******************
     function getWeather(coord) {
         findCity(coord);

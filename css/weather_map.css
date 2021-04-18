@@ -17,7 +17,10 @@
     border-radius: 3px;
     display: none;
 }
+#geoLocation {
+    font-size: 30px;
 
+}
 .navbar {
     position: relative;
     font-size: 1rem;
