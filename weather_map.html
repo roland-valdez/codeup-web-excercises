@@ -91,11 +91,14 @@
 
 
 
-  <div class="row d-flex justify-content-center mb-0">
+  <div class="row d-flex justify-content-center mb-0 w-100">
     <!--  *************** MAP *****************-->
-    <div class="column" id='map' style='width: 65vw; height: 50vh;'></div>
-    <!--    <pre id="mapOverlay" class="mapOverlay"></pre>-->
-    <div class="settings">
+    <div class="col-2">
+          <div id="mapOverlay" class="mapOverlay">hello</div>
+
+    </div>
+    <div class="col-6" id='map' style='width: 65vw; height: 50vh;'></div>
+    <div class="settings 2">
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
         Map Settings
@@ -115,7 +118,7 @@
             <div class="modal-body">
               <div>
               <label>Change Map Views</label>
-                <select class="form-control form-control-sm">
+                <select class="form-control form-control-sm custom-select">
                   <option value="default">Default</option>
                   <option value="satellite">Sattelite View</option>
                 </select>
@@ -124,10 +127,14 @@
                 <input type="checkbox" class="form-check-input" value="dark" id="darkMode">
                 <label class="form-check-label" for="darkMode">Dark Mode</label>
               </div>
+              <div class="form-group form-check my-3">
+                <input type="checkbox" class="form-check-input" value="dark" id="alerts">
+                <label class="form-check-label" for="alerts">Display Weather Alerts</label>
+              </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-info" data-dismiss="modal">Close</button>
-              <button type="button" id="settingBtn" data-dismiss="modal" class="btn btn-outline-info">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" id="settingBtn" data-dismiss="modal" class="btn btn-secondary">Save changes</button>
             </div>
           </div>
         </div>

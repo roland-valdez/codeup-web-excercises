@@ -3,19 +3,21 @@
     border: 3px solid cornflowerblue;
 }
 .mapOverlay {
-    width: 18vw;
-    height: 25vh;
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
+    width: 20vw;
+    height: auto;
+    background: rgba(95, 93, 93, 1);
+    color: white;
     position: absolute;
-    top: 400px;
-    left: 228px;
+    top: 20px;
+    right: 0px;
     padding: 5px 10px;
     margin: 0;
-    font-size: 11px;
+    font-size: 15px;
     line-height: 18px;
     border-radius: 3px;
-    display: none;
+    display: block;
+    overflow: visible;
+    /*z-index: 1000;*/
 }
 #geoLocation {
     font-size: 30px;

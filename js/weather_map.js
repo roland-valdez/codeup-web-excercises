@@ -2,7 +2,7 @@
 $(document).ready(function () {
 
 // ************* DISPLAY MAP ON LOAD - Default to San Antonio ******************
-    var coord = [19.4241, -88.4936]; // lat[0] long[1] standard format
+    var coord = [32.3863, -94.8758]; // lat[0] long[1] standard format
     // var coord = [29.4241, -98.4936]; // lat[0] long[1] standard format
 
     var city = "San Antonio, TX"//SA coordinates in Mapbox format
@@ -65,10 +65,11 @@ $(document).ready(function () {
         $.get("https://api.openweathermap.org/data/2.5/onecall", {
             lon: coord[1],
             lat: coord[0],
-            exclude: "hourly,minutely,alerts",
+            exclude: "hourly,minutely",
             appid: open_weatherToken,
             units: "imperial"
         }).done(function (results) {
+            console.log(results);
             displayWeather(results);
         });
     }
@@ -91,13 +92,11 @@ $(document).ready(function () {
     $("#weatherBtn").click(search);
     function search(e) {
         e.preventDefault();
-        // map = new mapboxgl.Map(mapOptions);
         geocode($("#weatherLocation").val(), mapboxToken).then(function (results) {
             mapOptions.center = results;
             coord = [results[1], results[0]];// in open weather format for getWeather()
             marker.remove();
             map.flyTo({center: results, zoom: 9.7, duration: 5000});
-            // map = new mapboxgl.Map(mapOptions);
             marker = new mapboxgl.Marker({color: "red", draggable: true})
                 .setLngLat(results)
                 .addTo(map);
@@ -110,18 +109,9 @@ $(document).ready(function () {
 // ************* GET LOCATION FROM MARKER DRAG ******************
     function onDragEnd() {
         coord = marker.getLngLat();
-        console.log("on drag", coord);
-
-        // map = new mapboxgl.Map(mapOptions);
         var lngLat = coord;
-        map.flyTo({center: lngLat, zoom: 9.7, duration: 1000})
-        // var marker = new mapboxgl.Marker({color: "red", draggable: true})
-        //     .setLngLat(lngLat)
-        //     .addTo(map);
-
-        // map.flyTo({center: coord, zoom: 9.7, duration: 1000});
+        map.flyTo({center: lngLat, zoom: 9.7, duration: 1000});
         coord = [coord.lat, coord.lng];
-
         getWeather(coord);
     }
 
@@ -131,6 +121,12 @@ $(document).ready(function () {
 
         var dayofWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        if ("alerts" in results) {
+            $("#mapOverlay").html("<div>" + results.alerts[0].event + "</div><div>" + results.alerts[0].description + "</div>");
+        }else {
+            $("#mapOverlay").html("<div>NO WEATHER ALERTS AT THIS TIME</div>");
+        }
+        // console.log(results.alerts[0].event);
         //**************** FORECAST WEATHER **********************
         var i = 0;
         $(".date").each(function () {
