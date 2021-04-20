@@ -42,10 +42,20 @@ const users = [
 // TODO 2. Use .filter to create an array of user objects where each user object has at least 3 languages in the languages array.
 
 let languageOverThree = users.filter(function(person){
+
+    if (person.languages.length > 2){
+        return person.languages;
+    }
+    // return person.languages.length >= 3;
+});
+let languageOverThree2 = users.filter(function(person){
+
+    // if (person.languages.length > 2){
+    //     return person.languages;
+    // }
     return person.languages.length >= 3;
 });
-
-console.log(languageOverThree);
+console.log(languageOverThree2);
 
 //TODO 3. Use .map to create an array of strings where each element is a user's email address
 
@@ -75,10 +85,16 @@ console.log(longEmail)
 
 // TODO. 6 Use .reduce to get the list of user's names in a single string. Example: Your instructors are: ryan, luis, zach, fernando, justin.
 
-let names = users.reduce(function(name, people) {
-    return `${name}  ${people.name},`;
-},"");
-console.log(`Your instructors are: ${names}.`);
+// let names = users.reduce(function(name, people) {
+//     return `${name}  ${people.name},`;
+// },"");
+// console.log((`Your instructors are: ${names}.`).slice(0, -1) + ".");
+
+let names = `Instructores are: ${users.map(function(people) {
+    return people.name;
+},"").join(",")}.`;
+console.log(names);
+// console.log((`Your instructors are: ${names}.`).slice(0, -1) + ".");
 
 //TODO: Bonus - Use .reduce to get the unique list of languages from the list of users.
 let uniqueLanguage = users.reduce(function (language, people){
